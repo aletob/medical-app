@@ -1,4 +1,3 @@
-/*
 package com.thesis.medicalapplication.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,7 @@ public class MedWebConfiguration implements WebMvcConfigurer {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/templates/");
+        templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
         return templateResolver;
     }
@@ -46,4 +45,3 @@ public class MedWebConfiguration implements WebMvcConfigurer {
     }
 
 }
-*/

@@ -1,16 +1,14 @@
-/*
 package com.thesis.medicalapplication.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-@Configuration
 public class MedWebAppConfigurer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[]{MedAppConfiguration.class, WebSecurityConfig.class};
+        return null;
     }
 
     @Override
@@ -20,8 +18,6 @@ public class MedWebAppConfigurer extends AbstractAnnotationConfigDispatcherServl
 
     @Override
     protected String[] getServletMappings() {
-        //return new String[]{"/index", "/index.html","/app/*","/templates/*"};
-        return new String[]{"/"};
+        return new String[]{"/", "/index"};
     }
 }
-*/
