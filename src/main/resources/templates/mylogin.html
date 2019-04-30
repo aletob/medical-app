@@ -5,6 +5,8 @@
     <title>Aplikacja medyczna</title>
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+
 
     <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
@@ -12,7 +14,7 @@
 <body>
 <div class="container login-container">
     <div class="row">
-        <div class="col-md-6 login-form-1">
+        <div class="login-form-1">
             <h3>Strona logowania do aplikacji</h3>
 
             <div th:if="${loginerror}" class="alert alert-danger" role="alert">Nieprawidłowe dane logowania</div>
