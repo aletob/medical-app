@@ -10,13 +10,16 @@
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<h1>Strona główna aplikacji</h1>
-<p>Witaj, <span th:text="${user}"></span></p>
+<div class="container">
+    <h1>Strona główna aplikacji</h1>
+    <p>Witaj, <span th:text="${user}"></span></p>
 
-<div class="row">
-    <form action="#" th:action="@{/logout}" method="post">
-        <input type="submit" value="Logout"/>
-    </form>
+    <div class="row">
+        <form action="#" th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout"/>
+        </form>
+    </div>
+
 </div>
 
 </body>

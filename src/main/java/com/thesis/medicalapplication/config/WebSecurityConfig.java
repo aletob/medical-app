@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
 @Configuration
 @EnableWebSecurity
@@ -31,10 +32,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
 
-        http.authorizeRequests().antMatchers("/index").permitAll()
+        http.authorizeRequests()
+                .antMatchers("/index/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/user/**").authenticated().anyRequest().permitAll()
                 .and().authorizeRequests().antMatchers("/secure/**").authenticated().anyRequest().hasAnyRole("ADMIN")
-                .and().formLogin().permitAll();
+                .and().formLogin().loginPage("/index/login")
+                .defaultSuccessUrl("/user/homepage")
+                .failureUrl("/index/login-error")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutSuccessUrl("/index/");
 
     }
 
@@ -43,4 +52,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(encodePWD());
 
     }
+
+
 }

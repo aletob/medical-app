@@ -10,8 +10,14 @@
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 </head>
 <body>
+<div class="container">
     <h1>Strona główna aplikacji</h1>
     <p th:text="${message}"></p>
+
+    <div class="row">
+        <a href="/index/login">Zaloguj się</a>
+    </div>
+</div>
 
 </body>
 </html>
