@@ -16,14 +16,12 @@ import java.util.stream.Collectors;
 @Setter
 public class CustomUserDetails implements UserDetails {
 
-    //serialVersionUID 30:47
-
     @Autowired
     private User user;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
+        return user.getUser_roles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole()))
                 .collect(Collectors.toList());
     }
 

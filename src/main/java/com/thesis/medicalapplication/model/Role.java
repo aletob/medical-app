@@ -4,10 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -19,5 +17,11 @@ public class Role {
     private int role_id;
 
     private String role;
+
+    @OneToMany(mappedBy = "role")
+    Set<User_role> user_roles;
+
+/*    @ManyToMany(mappedBy = "roles", cascade = CascadeType.PERSIST)
+    Set<User> users;*/
 
 }

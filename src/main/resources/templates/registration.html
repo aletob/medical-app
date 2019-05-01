@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Aplikacja medyczna</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+
+
+    <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container login-container">
+    <div class="row">
+        <div class="login-form-1">
+            <h3>Strona rejestracji do aplikacji</h3>
+
+            <form th:action="@{/index/registration}" th:object="${user}" th:method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Login" autofocus="autofocus" th:field="*{username}"/>
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="e-mail" autofocus="autofocus" th:field="*{email}"/>
+                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"/>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Hasło" autofocus="autofocus" th:field="*{password}"/>
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger"/>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btnSubmit" value="Zarejestruj" />
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
