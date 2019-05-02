@@ -46,9 +46,24 @@ public class User {
     Set<UserRole> userRoles;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    List<Record> records;
+    Set<Record> records;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
     Patient patient;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    Patient doctor;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    Set<Consultation> consultations;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    Set<MedicalVisit> medicalVisits;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    Set<Medicine> medicines;
+
+    @OneToMany(mappedBy = "reportedUser", fetch = FetchType.EAGER)
+    Set<Bug> bugs;
 
 }

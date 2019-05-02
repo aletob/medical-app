@@ -45,7 +45,7 @@ public class UserService {
             userRepository.save(user);
 
             UserRole userRole = new UserRole();
-            userRole.setRole(roleRepository.findByRole("USER"));
+            userRole.setRole(roleRepository.findByRoleDescription("USER"));
             userRole.setUser(user);
             userRoleRepository.save(userRole);
 
