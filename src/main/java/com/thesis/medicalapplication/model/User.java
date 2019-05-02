@@ -10,41 +10,45 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Set;
 
-@Entity
 @Setter
 @Getter
 @NoArgsConstructor
+@Entity
+@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int user_id;
+    @Column(name = "user_id")
+    private int userId;
 
     @NotEmpty
     @NotNull(message = "Nick jest obowiązkowy")
+    @Column(name = "username")
     private String username;
 
     @NotEmpty
     @NotNull(message = "Hasło jest obowiązkowe")
     @Length(min = 5, message = "Hasło musi mieć przynajmniej 5 znaków")
+    @Column(name = "password")
     private String password;
 
     @NotEmpty
     @NotNull(message = "Email jest obowiązkowy")
     @Email(message = "Email jest nieprawidłowy")
+    @Column(name = "email")
     private String email;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    Set<User_role> user_roles;
+    Set<UserRole> userRoles;
 
-/*    //@OneToMany(cascade = CascadeType.ALL)
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    // private Set<Role> roles = new HashSet<>();
-            Set<Role> roles;*/
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    List<Record> records;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
+    Patient patient;
 
 }

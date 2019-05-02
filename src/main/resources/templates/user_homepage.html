@@ -16,6 +16,14 @@
     <h1>Strona główna aplikacji</h1>
     <p>Witaj, <span th:text="${user}"></span></p>
 
+    <div class="col-md-4">
+        <a href="/user/addRecord">Dodaj wynik</a>
+    </div>
+
+    <div class="col-md-4">
+        <a href="/user/allRecords">Pokaż moje wyniki</a>
+    </div>
+
     <div class="row">
         <form action="#" th:action="@{/logout}" method="post">
             <input type="submit" value="Logout"/>

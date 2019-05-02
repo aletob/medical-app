@@ -11,10 +11,12 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class User_role {
+@Table(name = "user_role")
+public class UserRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id")
     private int id;
 
     @ManyToOne

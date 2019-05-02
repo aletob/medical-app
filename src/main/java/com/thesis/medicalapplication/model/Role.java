@@ -7,21 +7,22 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Set;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
+@Entity
+@Table(name = "role")
 public class Role {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int role_id;
+    @Column(name = "role_id")
+    private int roleId;
 
+    @Column(name = "role")
     private String role;
 
     @OneToMany(mappedBy = "role")
-    Set<User_role> user_roles;
-
-/*    @ManyToMany(mappedBy = "roles", cascade = CascadeType.PERSIST)
-    Set<User> users;*/
+    Set<UserRole> userRoles;
 
 }
