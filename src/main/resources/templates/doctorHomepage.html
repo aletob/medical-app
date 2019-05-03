@@ -11,7 +11,6 @@
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
           crossorigin="anonymous">
 
-
     <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
 
@@ -27,7 +26,7 @@
                 <li>
                     <a href="#">
                         <span class="fas fa-user-circle"></span>
-                        <span th:text="${message}"></span>
+                        <span th:text="${user}"></span>
                     </a>
                 </li>
             </ul>
@@ -38,11 +37,17 @@
 <nav class="navbar-primary">
     <ul class="navbar-primary-menu">
         <li>
-            <a href="#"><span class="fas fa-home"></span><span class="nav-label">Strona główna</span></a>
-            <a href="/index/login"><span class="fas fa-sign-in-alt"></span><span class="nav-label">Zaloguj</span></a>
-            <a href="/index/registration"><span class="fas fa-user-circle"></span><span class="nav-label">Zarejestruj</span></a>
-            <a href="/index/doctorRegistration"><span class="fas fa-briefcase-medical"></span><span class="nav-label">Jestem lekarzem</span></a>
+            <a href="#"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
+            <a href="#"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacje</span></a>
             <a href="#"><span class="fas fa-exclamation-circle"></span><span class="nav-label">Zgłoś błąd</span></a>
+            <a href="/user/homepage"><span class="fas fa-book-medical"></span><span class="nav-label">Panel pacjenta</span></a>
+            <a href="#">
+                <form action="#" th:action="@{/logout}" method="post" class="logout-form">
+                    <span class="fas fa-sign-out-alt"></span>
+                    <input type="submit" value="Wyloguj" class="nav-label input-button"/>
+                </form>
+            </a>
+
         </li>
     </ul>
 </nav>

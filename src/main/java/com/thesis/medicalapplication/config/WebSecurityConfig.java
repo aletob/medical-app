@@ -1,5 +1,6 @@
 package com.thesis.medicalapplication.config;
 
+import com.thesis.medicalapplication.handler.UrlAuthenticationSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -26,6 +28,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
+        return new UrlAuthenticationSuccessHandler();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -37,8 +43,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/webjars/**").permitAll()
                 .antMatchers("/user/**").authenticated().anyRequest().permitAll()
                 .and().authorizeRequests().antMatchers("/secure/**").authenticated().anyRequest().hasAnyRole("ADMIN")
+                .and().authorizeRequests().antMatchers("/doctor/**").authenticated().anyRequest().hasAnyRole("ADMIN", "DOCTOR")
                 .and().formLogin().loginPage("/index/login")
-                .defaultSuccessUrl("/user/homepage")
+                .successHandler(myAuthenticationSuccessHandler())
+                //.defaultSuccessUrl("/user/homepage")
                 .failureUrl("/index/login-error")
                 .permitAll()
                 .and()
