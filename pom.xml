@@ -83,6 +83,12 @@
             <version>4.3.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>font-awesome</artifactId>
+            <version>5.8.1</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -90,6 +96,7 @@
             <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
+
 
     </dependencies>
 

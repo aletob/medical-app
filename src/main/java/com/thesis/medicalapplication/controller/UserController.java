@@ -26,7 +26,7 @@ public class UserController {
     @GetMapping("/homepage")
     public String process(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
-        return "user_homepage";
+        return "userHomepage";
     }
 
     @GetMapping("/addRecord")

@@ -31,15 +31,15 @@ public class UserService {
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
-    public User findUserById(int id){
+    public User findUserById(int id) {
         return userRepository.findUserById(id);
     }
 
-    public void saveUser(User user){
+    public void saveUser(User user) {
         try {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             userRepository.save(user);
@@ -54,7 +54,12 @@ public class UserService {
         }
     }
 
-    public boolean isUserAlreadyPresent(User user){
-        return false;
+    public boolean isUserAlreadyPresent(User user) {
+        User existingUser = userRepository.findByUsername(user.getUsername());
+        if (existingUser != null) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

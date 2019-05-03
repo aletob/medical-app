@@ -3,7 +3,6 @@ package com.thesis.medicalapplication.controller;
 import com.thesis.medicalapplication.model.User;
 import com.thesis.medicalapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,17 +20,19 @@ public class ApplicationController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("message", "Witaj nowy użytkowniku");
+        model.addAttribute("message", "Niezalogowany");
         return "index";
     }
 
     @RequestMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("message", "Niezalogowany");
         return "mylogin";
     }
 
     @RequestMapping("/login-error")
     public String loginError(Model model) {
+        model.addAttribute("message", "Niezalogowany");
         model.addAttribute("loginerror", true);
         return "mylogin";
     }
@@ -40,6 +41,7 @@ public class ApplicationController {
     public String registration(Model model) {
         User user = new User();
         model.addAttribute("user", user);
+        model.addAttribute("message", "Niezalogowany");
         return "registration";
     }
 
@@ -52,7 +54,12 @@ public class ApplicationController {
             });
             return "registration";
 
-        } else {
+        }
+        else if(userService.isUserAlreadyPresent(user)){
+            bindingResult.rejectValue("username", null, "Użytkownik o takim nicku już istnieje");
+            return "registration";
+        }
+        else {
             userService.saveUser(user);
             return "redirect:/index/";
         }

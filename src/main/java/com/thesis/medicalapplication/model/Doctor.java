@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Setter
@@ -23,9 +25,13 @@ public class Doctor {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @NotEmpty
+    @NotNull
     @Column(name = "name")
     private String name;
 
+    @NotEmpty
+    @NotNull
     @Column(name = "second_name")
     private String secondName;
 
@@ -35,6 +41,8 @@ public class Doctor {
     @Column(name = "hospital")
     private String hospital;
 
+    @NotEmpty
+    @NotNull
     @Column(name = "specialization")
     private String specialization;
 

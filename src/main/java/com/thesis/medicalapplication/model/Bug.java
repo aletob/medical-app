@@ -5,6 +5,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Getter
@@ -23,6 +25,8 @@ public class Bug {
     @JoinColumn(name = "reported_user_id")
     private User reportedUser;
 
+    @NotEmpty
+    @NotNull
     @Column(name = "description")
     private String description;
 

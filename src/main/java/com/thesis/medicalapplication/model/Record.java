@@ -1,12 +1,13 @@
 package com.thesis.medicalapplication.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Getter
@@ -25,9 +26,13 @@ public class Record {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @NotEmpty
+    @NotNull
     @Column(name = "parameter")
     private String parameter;
 
+    @NotEmpty
+    @NotNull
     @Column(name = "value")
     private double value;
 
@@ -37,10 +42,12 @@ public class Record {
     @Column(name = "norm")
     private double norm;
 
-   @DateTimeFormat(pattern = "yyyy-MM-dd")
-   @Column(name = "date")
+    @NotEmpty
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "date")
     private Date date;
 
-   @Column(name = "time")
+    @Column(name = "time")
     private String time;
 }
