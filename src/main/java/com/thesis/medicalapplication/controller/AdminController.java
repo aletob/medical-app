@@ -2,6 +2,7 @@ package com.thesis.medicalapplication.controller;
 
 import com.thesis.medicalapplication.model.User;
 import com.thesis.medicalapplication.repository.UserRepository;
+import com.thesis.medicalapplication.service.BugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +18,9 @@ public class AdminController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    BugService bugService;
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -36,5 +40,12 @@ public class AdminController {
     public String adminPage(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         return "adminHomepage";
+    }
+
+    @GetMapping("/allBugs")
+    public String getAllBugs(Model model, HttpServletRequest request){
+        model.addAttribute("bugs", bugService.findAllNotFixed());
+        model.addAttribute("user", request.getRemoteUser());
+        return "allBugs";
     }
 }

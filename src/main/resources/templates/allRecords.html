@@ -6,6 +6,7 @@
 
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/homepage.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
           integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
@@ -37,7 +38,7 @@
 <nav class="navbar-primary">
     <ul class="navbar-primary-menu">
         <li>
-            <a href="/user/allRecords"><span class="fas fa-book-medical"></span><span class="nav-label">Moje wyniki</span></a>
+            <a href="/user/allRecords" class="navbar-active"><span class="fas fa-book-medical"></span><span class="nav-label">Moje wyniki</span></a>
             <a href="#"><span class="fas fa-capsules"></span><span class="nav-label">Moje leki</span></a>
             <a href="#"><span class="fas fa-calendar-alt"></span><span class="nav-label">Wizyty lekarskie</span></a>
             <a href="#"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacja</span></a>
@@ -53,10 +54,46 @@
     </ul>
 </nav>
 <div class="main-content">
-    <h1> MediRecords </h1>
-    <p>Strona główna aplikacji do zarządzania danymi medycznymi wykonanej w ramach pracy magisterskiej</p>
-</div>
+    <div class="row">
+        <div class="col-md-10">
+            <div>
+                <a th:href="${'/user/addRecord'}" class="form-button">Dodaj nowy</a>
+                <br>
+            </div>
 
+            <span th:if="${records.size() == 0}">
+                Brak zapisanych wyników
+            </span>
+            <table th:if="${records.size() > 0}" id="bootstrap-data-table" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>LP</th>
+                    <th>Parametr</th>
+                    <th>Wartość</th>
+                    <th>Jednostka</th>
+                    <th>Norma</th>
+                    <th>Data</th>
+                    <th>Godzina</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="record,iterationStatus  : ${records}">
+                    <td th:text="${iterationStatus.count}">1</td>
+                    <td th:text="${record.parameter}">001</td>
+                    <td th:text="${record.value}">Name</td>
+                    <td th:text="${record.unit}">Name</td>
+                    <td th:text="${record.norm}">Name</td>
+                    <td th:text="${record.date}">Name</td>
+                    <td th:text="${record.time}">Name</td>
+                    <td><a th:href="${'/user/deleteRecord?id='+record.getRecordId()}">Usuń</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
 
 </body>
 </html>

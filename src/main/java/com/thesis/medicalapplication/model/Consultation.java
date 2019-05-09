@@ -29,7 +29,6 @@ public class Consultation {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @NotEmpty
     @NotNull
     @Column(name = "question")
     private String question;

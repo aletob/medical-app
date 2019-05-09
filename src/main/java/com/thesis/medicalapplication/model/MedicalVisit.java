@@ -3,6 +3,7 @@ package com.thesis.medicalapplication.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -25,14 +26,16 @@ public class MedicalVisit {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "Podaj datę wizyty")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
     private Date date;
 
     @Column(name = "place")
     private String place;
 
+    @NotNull(message = "Podaj lekarza")
     @Column(name = "doctor")
     private String doctor;
 

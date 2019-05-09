@@ -26,13 +26,11 @@ public class Record {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @NotEmpty
-    @NotNull
+    @NotNull(message = "Podaj czego dotyczy wynik")
     @Column(name = "parameter")
     private String parameter;
 
-    @NotEmpty
-    @NotNull
+    @NotNull(message = "Podaj wartość parametru")
     @Column(name = "value")
     private double value;
 
@@ -42,12 +40,14 @@ public class Record {
     @Column(name = "norm")
     private double norm;
 
-    @NotEmpty
-    @NotNull
+    @NotNull(message = "Podaj datę badania")
+    @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
     private Date date;
 
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
     @Column(name = "time")
-    private String time;
+    private Date time;
 }

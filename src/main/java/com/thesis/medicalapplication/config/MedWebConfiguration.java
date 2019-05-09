@@ -49,8 +49,7 @@ public class MedWebConfiguration implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler(
-                "/webjars/**",
-                "/css/**")
+                "/webjars/**", "/css/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/",
                         "classpath:/static/css/");
     }

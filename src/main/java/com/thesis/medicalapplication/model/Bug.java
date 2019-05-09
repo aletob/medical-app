@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Getter
@@ -25,8 +26,7 @@ public class Bug {
     @JoinColumn(name = "reported_user_id")
     private User reportedUser;
 
-    @NotEmpty
-    @NotNull
+    @NotNull(message = "Podaj czego dotyczy błąd")
     @Column(name = "description")
     private String description;
 
