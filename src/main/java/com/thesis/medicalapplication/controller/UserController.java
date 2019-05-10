@@ -1,8 +1,10 @@
 package com.thesis.medicalapplication.controller;
 
 import com.thesis.medicalapplication.model.Bug;
+import com.thesis.medicalapplication.model.Medicine;
 import com.thesis.medicalapplication.model.Record;
 import com.thesis.medicalapplication.service.BugService;
+import com.thesis.medicalapplication.service.MedicineService;
 import com.thesis.medicalapplication.service.RecordService;
 import com.thesis.medicalapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class UserController {
 
     @Autowired
     BugService bugService;
+
+    @Autowired
+    MedicineService medicineService;
 
     @GetMapping("/homepage")
     public String process(Model model, HttpServletRequest request) {
@@ -67,6 +72,48 @@ public class UserController {
     public String deleteRecord(@RequestParam("id") Integer id) {
         recordService.delete(id);
         return "redirect:/user/allRecords";
+    }
+
+
+    @GetMapping("/allMedicines")
+    public String getAllMedicines(Model model, HttpServletRequest request){
+        model.addAttribute("user", request.getRemoteUser());
+        model.addAttribute("medicines", medicineService.findAllUserMedicines(request.getRemoteUser()));
+        return "allMedicines";
+    }
+
+    @GetMapping("/allMedicinesCurrent")
+    public String getAllCurrentMedicines(Model model, HttpServletRequest request){
+        model.addAttribute("user", request.getRemoteUser());
+        model.addAttribute("medicines", medicineService.findCurrentMedicines(request.getRemoteUser()));
+        return "allMedicines";
+    }
+
+    @RequestMapping(value = "/deleteMedicine")
+    public String deleteMedicine(@RequestParam("id") Integer id) {
+        medicineService.delete(id);
+        return "redirect:/user/allMedicines";
+    }
+
+    @GetMapping("/addMedicine")
+    public String addMedicineGet(Model model) {
+        Medicine medicine = new Medicine();
+        model.addAttribute("medicine", medicine);
+        return "addMedicine";
+    }
+
+    @RequestMapping(value = "/addMedicine", method = RequestMethod.POST)
+    public String addMedicinePost(@Valid Medicine medicine, BindingResult bindingResult, HttpServletRequest request){
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(error -> {
+                System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
+            });
+            return "addMedicine";
+
+        } else {
+            medicineService.saveMedicine(medicine, request.getRemoteUser());
+            return "redirect:/user/allMedicines";
+        }
     }
 
 

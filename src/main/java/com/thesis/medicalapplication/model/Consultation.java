@@ -21,10 +21,12 @@ public class Consultation {
     @Column(name = "consultation_id")
     private int consultationId;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;

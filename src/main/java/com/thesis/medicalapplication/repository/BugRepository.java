@@ -12,4 +12,7 @@ public interface BugRepository extends JpaRepository<Bug, Integer> {
 
     @Query(value = "Select * from bug where fixed=0", nativeQuery = true)
     List<Bug> findBugsNotFixed();
+
+    @Query(value = "Select * from bug", nativeQuery = true)
+    List<Bug> findAllBugs();
 }

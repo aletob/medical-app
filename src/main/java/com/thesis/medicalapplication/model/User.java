@@ -52,7 +52,7 @@ public class User {
     Patient patient;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
-    Patient doctor;
+    Doctor doctor;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     Set<Consultation> consultations;

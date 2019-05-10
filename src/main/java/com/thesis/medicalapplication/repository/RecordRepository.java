@@ -16,4 +16,9 @@ public interface RecordRepository extends JpaRepository<Record, Integer> {
 
     @Query(value = "Select * from record where user_id=:userId", nativeQuery = true)
     List<Record> findRecordsByUserId(@Param("userId") int userId);
+
+    @Query(value = "Select * from record where parameter=:parameter and user_id=:userId", nativeQuery = true)
+    List<Record> findRecordByParameter(@Param("parameter") String parameter, @Param("userId") int userId);
+
+    //wyszukiwanie po dacie
 }

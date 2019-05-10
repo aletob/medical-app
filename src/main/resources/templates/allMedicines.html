@@ -38,8 +38,8 @@
 <nav class="navbar-primary">
     <ul class="navbar-primary-menu">
         <li>
-            <a href="/user/allRecords" class="navbar-active"><span class="fas fa-book-medical"></span><span class="nav-label">Moje wyniki</span></a>
-            <a href="/user/allMedicines"><span class="fas fa-capsules"></span><span class="nav-label">Moje leki</span></a>
+            <a href="/user/allRecords"><span class="fas fa-book-medical"></span><span class="nav-label">Moje wyniki</span></a>
+            <a href="#" class="navbar-active"><span class="fas fa-capsules"></span><span class="nav-label">Moje leki</span></a>
             <a href="#"><span class="fas fa-calendar-alt"></span><span class="nav-label">Wizyty lekarskie</span></a>
             <a href="#"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacja</span></a>
             <a href="/user/addBug"><span class="fas fa-exclamation-circle"></span><span class="nav-label">Zgłoś błąd</span></a>
@@ -57,36 +57,41 @@
     <div class="row">
         <div class="col-md-10">
             <div>
-                <a th:href="${'/user/addRecord'}" class="form-button">Dodaj nowy</a>
+                <a th:href="${'/user/addMedicine'}" class="form-button">Dodaj nowy</a>
                 <br>
             </div>
 
-            <span th:if="${records.size() == 0}">
-                Brak zapisanych wyników
+            <div th:if="${medicines.size() > 0}">
+                <a th:href="${'/user/allMedicines'}" class="form-button-2">Wyświetl wszystkie</a>
+                <a th:href="${'/user/allMedicinesCurrent'}" class="form-button-2">Wyświetl aktualne</a>
+                <br>
+            </div>
+            <br>
+
+            <span th:if="${medicines.size() == 0}">
+                Brak zapisanych leków
             </span>
-            <table th:if="${records.size() > 0}" id="bootstrap-data-table" class="table table-striped table-bordered">
+            <table th:if="${medicines.size() > 0}" id="bootstrap-data-table" class="table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th>LP</th>
-                    <th>Parametr</th>
-                    <th>Wartość</th>
-                    <th>Jednostka</th>
-                    <th>Norma</th>
-                    <th>Data</th>
-                    <th>Godzina</th>
+                    <th>Nazwa</th>
+                    <th>Dawka</th>
+                    <th>Początek przyjmowania</th>
+                    <th>Koniec przyjmowania</th>
+                    <th>Lekarz zlecający</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="record,iterationStatus  : ${records}">
+                <tr th:each="medicine,iterationStatus  : ${medicines}">
                     <td th:text="${iterationStatus.count}">1</td>
-                    <td th:text="${record.parameter}">001</td>
-                    <td th:text="${record.value}">Name</td>
-                    <td th:text="${record.unit}">Name</td>
-                    <td th:text="${record.norm}">Name</td>
-                    <td th:text="${record.date}">Name</td>
-                    <td th:text="${record.time}">Name</td>
-                    <td><a th:href="${'/user/deleteRecord?id='+record.getRecordId()}">Usuń</a></td>
+                    <td th:text="${medicine.name}">Name</td>
+                    <td th:text="${medicine.dose}">Name</td>
+                    <td th:text="${medicine.startDate}">Name</td>
+                    <td th:text="${medicine.endDate}">Name</td>
+                    <td th:text="${medicine.doctor}">Name</td>
+                    <td><a th:href="${'/user/deleteMedicine?id='+medicine.getMedicineId()}">Usuń</a></td>
                 </tr>
                 </tbody>
             </table>
