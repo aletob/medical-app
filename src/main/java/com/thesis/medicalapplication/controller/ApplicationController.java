@@ -1,6 +1,8 @@
 package com.thesis.medicalapplication.controller;
 
+import com.thesis.medicalapplication.model.Bug;
 import com.thesis.medicalapplication.model.User;
+import com.thesis.medicalapplication.service.BugService;
 import com.thesis.medicalapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 
@@ -17,6 +20,9 @@ public class ApplicationController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    BugService bugService;
 
     @GetMapping("/")
     public String index(Model model) {

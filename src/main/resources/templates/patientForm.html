@@ -38,7 +38,7 @@
 <nav class="navbar-primary">
     <ul class="navbar-primary-menu">
         <li>
-            <a href="#" class="navbar-active"><span class="fas fa-book-medical"></span><span class="nav-label">Moje wyniki</span></a>
+            <a href="/user/allRecords"><span class="fas fa-book-medical"></span><span class="nav-label">Moje wyniki</span></a>
             <a href="/user/allMedicines"><span class="fas fa-capsules"></span><span class="nav-label">Moje leki</span></a>
             <a href="/user/allVisits"><span class="fas fa-calendar-alt"></span><span class="nav-label">Wizyty lekarskie</span></a>
             <a href="/user/allConsultation"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacja</span></a>
@@ -58,35 +58,48 @@
 
         <div class="row">
             <div class="col-md-8">
-                <form th:action="@{/user/addRecord}" th:object="${record}" th:method="post">
+                <!--<form th:action="@{/user/patientAccountAdd}" th:object="${patient}" th:method="post">-->
+                <form th:action="@{/user/patientAccountAdd}" th:object="${patient}" th:method="put">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nazwa parametru" autofocus="autofocus" th:field="*{parameter}"/>
-                        <p th:if="${#fields.hasErrors('parameter')}" th:errors="*{parameter}" class="alert alert-danger"/>
+                        <label>Imię</label>
+                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{name}"/>
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"/>
                     </div>
 
                     <div class="form-group">
-                        <input type="number" step="0.01" class="form-control" placeholder="Wartość parametru" autofocus="autofocus" th:field="*{value}"/>
-                        <p th:if="${#fields.hasErrors('value')}" th:errors="*{value}" class="alert alert-danger"/>
+                        <label>Nazwisko</label>
+                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{secondName}"/>
+                        <p th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}" class="alert alert-danger"/>
                     </div>
 
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Jednostka" autofocus="autofocus" th:field="*{unit}"/>
-                        <p th:if="${#fields.hasErrors('unit')}" th:errors="*{unit}" class="alert alert-danger"/>
+                        <label>Adres</label>
+                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{address}"/>
+                        <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"/>
                     </div>
 
                     <div class="form-group">
-                        <input type="number" step="0.01" class="form-control" placeholder="Norma" autofocus="autofocus" th:field="*{norm}"/>
-                        <p th:if="${#fields.hasErrors('norm')}" th:errors="*{norm}" class="alert alert-danger"/>
+                        <label>Wiek</label>
+                        <input type="number" class="form-control" autofocus="autofocus" th:field="*{age}"/>
+                        <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}" class="alert alert-danger"/>
                     </div>
 
                     <div class="form-group">
-                        <input type="date" class="form-control" placeholder="Data" autofocus="autofocus" th:field="*{date}"/>
-                        <p th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="alert alert-danger"/>
+                        <label>Wzrost [cm]</label>
+                        <input type="number" class="form-control"autofocus="autofocus" th:field="*{height}"/>
+                        <p th:if="${#fields.hasErrors('height')}" th:errors="*{height}" class="alert alert-danger"/>
                     </div>
 
                     <div class="form-group">
-                        <input type="time" class="form-control" placeholder="Godzina" autofocus="autofocus" th:field="*{time}"/>
-                        <p th:if="${#fields.hasErrors('time')}" th:errors="*{time}" class="alert alert-danger"/>
+                        <label>Waga [kg]</label>
+                        <input type="number" class="form-control" autofocus="autofocus" th:field="*{weight}"/>
+                        <p th:if="${#fields.hasErrors('weight')}" th:errors="*{weight}" class="alert alert-danger"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Grupa krwi</label>
+                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{bloodType}"/>
+                        <p th:if="${#fields.hasErrors('bloodType')}" th:errors="*{bloodType}" class="alert alert-danger"/>
                     </div>
 
 

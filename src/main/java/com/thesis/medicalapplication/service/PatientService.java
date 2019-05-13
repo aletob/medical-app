@@ -6,6 +6,7 @@ import com.thesis.medicalapplication.repository.PatientRepository;
 import com.thesis.medicalapplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PatientService {
@@ -16,6 +17,7 @@ public class PatientService {
     @Autowired
     UserRepository userRepository;
 
+    @Transactional
     public void savePatient(Patient patient, String username){
         User user = userRepository.findByUsername(username);
         patient.setUser(user);

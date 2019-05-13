@@ -5,9 +5,11 @@ import com.thesis.medicalapplication.model.User;
 import com.thesis.medicalapplication.repository.MedicalVisitRepository;
 import com.thesis.medicalapplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MedicalVisitService {
 
     @Autowired

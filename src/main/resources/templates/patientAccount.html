@@ -42,7 +42,7 @@
             <a href="/user/allMedicines"><span class="fas fa-capsules"></span><span class="nav-label">Moje leki</span></a>
             <a href="/user/allVisits"><span class="fas fa-calendar-alt"></span><span class="nav-label">Wizyty lekarskie</span></a>
             <a href="/user/allConsultation"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacja</span></a>
-            <a href="#" class="navbar-active"><span class="fas fa-exclamation-circle"></span><span class="nav-label">Zgłoś błąd</span></a>
+            <a href="/user/addBug"><span class="fas fa-exclamation-circle"></span><span class="nav-label">Zgłoś błąd</span></a>
             <a href="#">
                 <form action="#" th:action="@{/logout}" method="post" class="logout-form">
                     <span class="fas fa-sign-out-alt"></span>
@@ -54,24 +54,70 @@
     </ul>
 </nav>
 <div class="main-content">
-    <div class="container login-container">
-        <div class="row">
-            <div class="login-form">
-                <h3>Zgłaszanie błędu aplikacji</h3>
+    <div class="row">
+        <div class="col-md-10">
 
-                <form th:action="@{/user/addBug}" th:object="${bug}" th:method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control bug-input" placeholder="Opis błędu" autofocus="autofocus" th:field="*{description}"/>
-                        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="alert alert-danger"/>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="submit" class="btnSubmit" value="Zgłoś" />
-                    </div>
-
-                </form>
+            <div th:if="${patient == null}">
+                <span> Brak informacji personalnych </span>
+                <a th:href="${'/user/patientAccountAdd'}" class="form-button">Uzupełnij</a>
+                <br/>
             </div>
+
+            <table th:if="${patient != null}" id="bootstrap-data-table" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Parametr</th>
+                    <th>Wartość</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>Imię</td>
+                    <td th:text="${patient.name}"></td>
+                </tr>
+
+                <tr>
+                    <td>Nazwisko</td>
+                    <td th:text="${patient.secondName}"></td>
+                </tr>
+
+                <tr>
+                    <td>Adres</td>
+                    <td th:text="${patient.address}"></td>
+                </tr>
+
+                <tr>
+                    <td>Wiek</td>
+                    <td th:text="${patient.age}"></td>
+                </tr>
+
+                <tr>
+                    <td>Wzrost</td>
+                    <td th:text="${patient.height}"></td>
+                </tr>
+
+                <tr>
+                    <td>Waga</td>
+                    <td th:text="${patient.weight}"></td>
+                </tr>
+
+                <tr>
+                    <td>Grupa krwi</td>
+                    <td th:text="${patient.bloodType}"></td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+<!--            <div th:if="${patient != null}">
+                <a th:href="${'/user/patientAccountEdit'}" class="form-button">Edytuj</a>
+            </div>-->
+
         </div>
+
+
     </div>
 
 </div>

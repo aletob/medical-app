@@ -34,15 +34,6 @@
     margin-left: auto;
     margin-right: auto;
 }
-.btnForgetPwd{
-    color: #fff;
-    font-weight: 600;
-    text-decoration: none;
-}
-.btnForgetPwd:hover{
-    text-decoration:none;
-    color:#fff;
-}
 
 .bug-input{
     width: 300px;
@@ -51,7 +42,7 @@
 
 .form-button{
     display: block;
-    width: 120px;
+    width: 200px;
     height: 40px;
     padding: 6px;
     text-align: center;
@@ -62,7 +53,7 @@
 
     background: #007EA7;
     color: white;
-    transition-duration: 0.4s;
+    transition-duration: 0.2s;
     border-radius: 8px;
 }
 
@@ -90,7 +81,7 @@ a:hover, a:focus, a:active{
     background: white;
     border: 2px solid #007EA7;
     color: black;
-    transition-duration: 0.4s;
+    transition-duration: 0.2s;
     border-radius: 8px;
 }
 

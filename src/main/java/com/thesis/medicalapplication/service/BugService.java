@@ -31,6 +31,13 @@ public class BugService {
         bugRepository.save(bug);
     }
 
+    public void saveBug(Bug bug){
+        Date date = new Date();
+        bug.setReportDate(date);
+        bug.setFixed(false);
+        bugRepository.save(bug);
+    }
+
     public List<Bug> findAllNotFixed(){
         return bugRepository.findBugsNotFixed();
     }

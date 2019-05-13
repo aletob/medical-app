@@ -40,9 +40,9 @@
         <li>
             <a href="/user/allRecords"><span class="fas fa-book-medical"></span><span class="nav-label">Moje wyniki</span></a>
             <a href="/user/allMedicines"><span class="fas fa-capsules"></span><span class="nav-label">Moje leki</span></a>
-            <a href="/user/allVisits"><span class="fas fa-calendar-alt"></span><span class="nav-label">Wizyty lekarskie</span></a>
+            <a href="#" class="navbar-active"><span class="fas fa-calendar-alt"></span><span class="nav-label">Wizyty lekarskie</span></a>
             <a href="/user/allConsultation"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacja</span></a>
-            <a href="#" class="navbar-active"><span class="fas fa-exclamation-circle"></span><span class="nav-label">Zgłoś błąd</span></a>
+            <a href="/user/addBug"><span class="fas fa-exclamation-circle"></span><span class="nav-label">Zgłoś błąd</span></a>
             <a href="#">
                 <form action="#" th:action="@{/logout}" method="post" class="logout-form">
                     <span class="fas fa-sign-out-alt"></span>
@@ -54,23 +54,47 @@
     </ul>
 </nav>
 <div class="main-content">
-    <div class="container login-container">
-        <div class="row">
-            <div class="login-form">
-                <h3>Zgłaszanie błędu aplikacji</h3>
-
-                <form th:action="@{/user/addBug}" th:object="${bug}" th:method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control bug-input" placeholder="Opis błędu" autofocus="autofocus" th:field="*{description}"/>
-                        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="alert alert-danger"/>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="submit" class="btnSubmit" value="Zgłoś" />
-                    </div>
-
-                </form>
+    <div class="row">
+        <div class="col-md-10">
+            <div>
+                <a th:href="${'/user/addVisit'}" class="form-button">Dodaj wizytę</a>
+                <br/>
             </div>
+
+            <div th:if="${visits.size() > 0}">
+                <a th:href="${'/user/allVisits'}" class="form-button-2">Wyświetl wszystkie</a>
+                <a th:href="${'/user/allFutureVisits'}" class="form-button-2">Wyświetl nadchodzące</a>
+                <br>
+            </div>
+            <br/>
+
+            <span th:if="${visits.size() == 0}">
+                Brak zapisanych wizyt
+            </span>
+            <table th:if="${visits.size() > 0}" id="bootstrap-data-table" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>LP</th>
+                    <th>Data wizyty</th>
+                    <th>Miejsce</th>
+                    <th>Lekarz</th>
+                    <th>Specjalizacja</th>
+                    <th>Opis</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="visit,iterationStatus  : ${visits}">
+                    <td th:text="${iterationStatus.count}">1</td>
+                    <td th:text="${visit.date}">Name</td>
+                    <td th:text="${visit.place}">Name</td>
+                    <td th:text="${visit.doctor}">Name</td>
+                    <td th:text="${visit.specialization}">Name</td>
+                    <td th:text="${visit.description}">Name</td>
+                    <td><a th:href="${'/user/deleteVisit?id='+visit.visitId}">Usuń</a></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
