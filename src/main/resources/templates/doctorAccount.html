@@ -53,10 +53,63 @@
     </ul>
 </nav>
 <div class="main-content">
-    <h1> MediRecords </h1>
-    <p>Strona główna aplikacji do zarządzania danymi medycznymi wykonanej w ramach pracy magisterskiej</p>
-</div>
+    <div class="row">
+        <div class="col-md-10">
 
+            <div th:if="${doctor == null}">
+                <span> Brak informacji personalnych. Konto nieaktywne. Uzupełnij w celu weryfikacji.</span>
+                <a th:href="${'/doctor/accountAdd'}" class="form-button">Dodaj dane</a>
+                <br/>
+            </div>
+
+            <table th:if="${doctor != null}" id="bootstrap-data-table" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Parametr</th>
+                    <th>Wartość</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>Imię</td>
+                    <td th:text="${doctor.name}"></td>
+                </tr>
+
+                <tr>
+                    <td>Nazwisko</td>
+                    <td th:text="${doctor.secondName}"></td>
+                </tr>
+
+                <tr>
+                    <td>Adres</td>
+                    <td th:text="${doctor.address}"></td>
+                </tr>
+
+                <tr>
+                    <td>Miejsce pracy</td>
+                    <td th:text="${doctor.hospital}"></td>
+                </tr>
+
+                <tr>
+                    <td>Specjalizacja</td>
+                    <td th:text="${doctor.specialization}"></td>
+                </tr>
+
+                </tbody>
+
+            </table>
+
+            <div th:if="${doctor != null}">
+                <a th:href="${'/doctor/accountEdit'}" class="form-button">Edytuj</a>
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
 
 </body>
 </html>

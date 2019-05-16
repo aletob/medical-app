@@ -20,6 +20,7 @@ public class DoctorService {
     public void saveDoctor(Doctor doctor, String username){
         User user = userRepository.findByUsername(username);
         doctor.setUser(user);
+        doctor.setEnable(false);
         doctorRepository.save(doctor);
     }
 

@@ -71,4 +71,31 @@ public class ApplicationController {
         }
     }
 
+    @RequestMapping("/doctorRegistration")
+    public String doctorRegistration(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        model.addAttribute("message", "Niezalogowany");
+        return "doctorRegistration";
+    }
+
+    @RequestMapping(value = "/doctorRegistration", method = RequestMethod.POST)
+    public String registerDoctor(@Valid User user, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(error -> {
+                System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
+            });
+            return "doctorRegistration";
+
+        }
+        else if(userService.isUserAlreadyPresent(user)){
+            bindingResult.rejectValue("username", null, "Użytkownik o takim nicku już istnieje");
+            return "doctorRegistration";
+        }
+        else {
+            userService.saveUserDoctor(user);
+            return "redirect:/index/";
+        }
+    }
+
 }

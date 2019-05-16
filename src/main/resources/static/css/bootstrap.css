@@ -19,8 +19,19 @@
 
 .login-form h3{
     text-align: center;
-    margin-bottom:12%;
+    margin-bottom:5%;
     color:#fff;
+}
+
+
+.login-form h6{
+    text-align: center;
+    margin-bottom:5%;
+    background: white;
+    border: 2px solid red;
+    color: black;
+    border-radius: 4px;
+    padding: 2%;
 }
 
 .btnSubmit{

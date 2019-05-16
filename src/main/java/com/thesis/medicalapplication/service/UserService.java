@@ -56,6 +56,17 @@ public class UserService {
         }
     }
 
+    @Transactional
+    public void saveUserDoctor(User user) {
+        saveUser(user);
+
+        UserRole userRole = new UserRole();
+        userRole.setRole(roleRepository.findByRoleDescription("DOCTOR"));
+        userRole.setUser(user);
+        userRoleRepository.save(userRole);
+
+    }
+
     public boolean isUserAlreadyPresent(User user) {
         User existingUser = userRepository.findByUsername(user.getUsername());
         if (existingUser != null) {

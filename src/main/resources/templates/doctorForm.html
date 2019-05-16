@@ -53,10 +53,59 @@
     </ul>
 </nav>
 <div class="main-content">
-    <h1> MediRecords </h1>
-    <p>Strona główna aplikacji do zarządzania danymi medycznymi wykonanej w ramach pracy magisterskiej</p>
-</div>
+    <div class="container">
 
+        <div class="row">
+            <div class="col-md-8">
+                <form th:action="@{/doctor/accountAdd}" th:object="${doctor}" th:method="post">
+                    <div class="form-group">
+                        <label>Imię</label>
+                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{name}"/>
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="alert alert-danger"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nazwisko</label>
+                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{secondName}"/>
+                        <p th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}" class="alert alert-danger"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Adres</label>
+                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{address}"/>
+                        <p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" class="alert alert-danger"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Miejsce pracy</label>
+                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{hospital}"/>
+                        <p th:if="${#fields.hasErrors('hospital')}" th:errors="*{hospital}" class="alert alert-danger"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Specjalizacja</label>
+                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{specialization}"/>
+                        <p th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}" class="alert alert-danger"/>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Dodaj
+                    </button>
+
+                    <button class="btn">
+                        <a href="/doctor/homepage">Powrót</a>
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
 
 </body>
 </html>
