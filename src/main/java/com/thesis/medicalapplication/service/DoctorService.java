@@ -8,6 +8,8 @@ import com.thesis.medicalapplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class DoctorService {
 
@@ -24,8 +26,22 @@ public class DoctorService {
         doctorRepository.save(doctor);
     }
 
+    public Doctor getDoctorById(int id){
+        return doctorRepository.findDoctorByDoctorId(id);
+    }
+
     public Doctor getDoctorByUsername(String username){
         return userRepository.findByUsername(username).getDoctor();
+    }
+
+    public List<Doctor> getAllDiasabled(){
+        return doctorRepository.findAllDisabledDoctors();
+    }
+
+    public void enableAccount(int id){
+        Doctor doctor = doctorRepository.findDoctorByDoctorId(id);
+        doctor.setEnable(true);
+        doctorRepository.save(doctor);
     }
 
 }

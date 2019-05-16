@@ -38,7 +38,7 @@
 <nav class="navbar-primary">
     <ul class="navbar-primary-menu">
         <li>
-            <a href="/secure/disabledAccounts"><span class="fas fa-lock-open"></span><span class="nav-label">Aktywacja kont</span></a>
+            <a href="#"><span class="fas fa-lock-open"></span><span class="nav-label">Aktywacja kont</span></a>
             <a href="/secure/allBugs"><span class="fas fa-exclamation-circle"></span><span class="nav-label">Zgłoszone błędy</span></a>
             <a href="#"><span class="fas fa-file-alt"></span><span class="nav-label">Statystyki</span></a>
             <a href="#">
@@ -52,10 +52,36 @@
     </ul>
 </nav>
 <div class="main-content">
-    <h1> MediRecords </h1>
-    <p>Strona główna aplikacji do zarządzania danymi medycznymi wykonanej w ramach pracy magisterskiej</p>
-</div>
+    <div class="row">
+        <div class="col-md-10">
 
+            <span th:if="${doctors.size() == 0}">
+                Brak kont wymagających weryfikacji
+            </span>
+            <table th:if="${doctors.size() > 0}" id="bootstrap-data-table" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>LP</th>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Specjalizacja</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="doctor,iterationStatus  : ${doctors}">
+                    <td th:text="${iterationStatus.count}">1</td>
+                    <td th:text="${doctor.name}">Name</td>
+                    <td th:text="${doctor.secondName}">Name</td>
+                    <td th:text="${doctor.specialization}">Name</td>
+                    <td><a th:href="${'/secure/doctor?id='+doctor.doctorId}">Podgląd</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
 
 </body>
 </html>
