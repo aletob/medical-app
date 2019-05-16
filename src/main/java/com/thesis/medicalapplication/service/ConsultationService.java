@@ -7,6 +7,7 @@ import com.thesis.medicalapplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -35,6 +36,10 @@ public class ConsultationService {
     public void saveConsultation(Consultation consultation, String username){
         User user = userRepository.findByUsername(username);
         consultation.setUser(user);
+
+        Date date = new Date();
+        consultation.setQuestionDate(date);
+
         consultationRepository.save(consultation);
     }
 

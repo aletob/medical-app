@@ -1,13 +1,18 @@
 package com.thesis.medicalapplication.controller;
 
+import com.thesis.medicalapplication.model.Consultation;
 import com.thesis.medicalapplication.service.ConsultationService;
+import com.thesis.medicalapplication.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/user")
@@ -16,11 +21,36 @@ public class ConsultationController {
     @Autowired
     ConsultationService consultationService;
 
+    @Autowired
+    DoctorService doctorService;
+
     @GetMapping("/allConsultation")
     public String getAllConsultation(Model model, HttpServletRequest request){
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("consultations", consultationService.findAllUserConsultations(request.getRemoteUser()));
         return "allConsultations";
+    }
+
+    @GetMapping("/addConsultation")
+    public String addConsultationGet(Model model, HttpServletRequest request) {
+        model.addAttribute("consultation", new Consultation());
+        model.addAttribute("user", request.getRemoteUser());
+        model.addAttribute("doctors", doctorService.getAllEnabled());
+        return "addConsultation";
+    }
+
+    @RequestMapping(value = "/addConsultation", method = RequestMethod.POST)
+    public String addConsultationPost(@Valid Consultation consultation, BindingResult bindingResult, HttpServletRequest request){
+        if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(error -> {
+                System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
+            });
+            return "addConsultation";
+
+        } else {
+            consultationService.saveConsultation(consultation, request.getRemoteUser());
+            return "redirect:/user/allConsultation";
+        }
     }
 
 }

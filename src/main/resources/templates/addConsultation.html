@@ -58,37 +58,24 @@
 
         <div class="row">
             <div class="col-md-8">
-                <form th:action="@{/user/addVisit}" th:object="${visit}" th:method="post">
+                <form th:action="@{/user/addConsultation}" th:object="${consultation}" th:method="post">
+
                     <div class="form-group">
-                        <label>Data wizyty</label>
-                        <input type="date" class="form-control" autofocus="autofocus" th:field="*{date}"/>
-                        <p th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="alert alert-danger"/>
+                        <label>Treść zapytania</label>
+                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{question}"/>
+                        <p th:if="${#fields.hasErrors('question')}" th:errors="*{question}" class="alert alert-danger"/>
                     </div>
 
                     <div class="form-group">
-                        <label>Miejsce wizyty</label>
-                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{place}"/>
-                        <p th:if="${#fields.hasErrors('place')}" th:errors="*{place}" class="alert alert-danger"/>
-                    </div>
+                        <select th:field="*{doctor.doctorId}">
+                            <option value="0" disabled="disabled" selected="selected">Proszę wybrać lekarza</option>
+                            <option th:each="doctorOption : ${doctors}"
+                                    th:value="${doctorOption.doctorId}"
+                                    th:text="${doctorOption.name} + ' ' + ${doctorOption.secondName} + ', '+ ${doctorOption.specialization}" >
+                            </option>
 
-                    <div class="form-group">
-                        <label>Lekarz</label>
-                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{doctor}"/>
-                        <p th:if="${#fields.hasErrors('doctor')}" th:errors="*{doctor}" class="alert alert-danger"/>
+                        </select>
                     </div>
-
-                    <div class="form-group">
-                        <label>Specjalizacja</label>
-                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{specialization}"/>
-                        <p th:if="${#fields.hasErrors('specialization')}" th:errors="*{specialization}" class="alert alert-danger"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Opis</label>
-                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{description}"/>
-                        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="alert alert-danger"/>
-                    </div>
-
 
                     <button type="submit" class="btn btn-primary">
                         Dodaj

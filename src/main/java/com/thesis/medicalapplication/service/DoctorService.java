@@ -38,10 +38,24 @@ public class DoctorService {
         return doctorRepository.findAllDisabledDoctors();
     }
 
+    public List<Doctor> getAllEnabled(){
+        return doctorRepository.findAllEnabledDoctors();
+    }
+
     public void enableAccount(int id){
         Doctor doctor = doctorRepository.findDoctorByDoctorId(id);
         doctor.setEnable(true);
         doctorRepository.save(doctor);
     }
+
+    public boolean checkIfAccountEnable(int id){
+        Doctor doctor = doctorRepository.findDoctorByUserIdIfEnable(id).orElse(null);
+        if(doctor != null){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 
 }

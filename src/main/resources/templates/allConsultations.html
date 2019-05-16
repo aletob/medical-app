@@ -88,7 +88,7 @@
                     <td th:text="${iterationStatus.count}">1</td>
                     <td th:text="${consultation.questionDate}">Name</td>
                     <td th:text="${consultation.question}">Name</td>
-                    <td th:text="${consultation.doctor}">Name</td>
+                    <td th:text="${consultation.doctor.getName()}">Name</td>
                     <td th:text="${consultation.answerDate}">Name</td>
                     <td th:text="${consultation.answer}">Name</td>
                     <td><a th:href="${'/user/Consultation?id='+consultation.consultationId}">Podgląd</a></td>

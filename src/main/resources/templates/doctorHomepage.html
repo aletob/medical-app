@@ -39,7 +39,7 @@
     <ul class="navbar-primary-menu">
         <li>
             <a href="/doctor/homepage"><span class="fas fa-home"></span><span class="nav-label">Strona główna</span></a>
-            <a href="#"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
+            <a href="/doctor/myPatients"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
             <a href="#"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacje</span></a>
             <a href="#"><span class="fas fa-exclamation-circle"></span><span class="nav-label">Zgłoś błąd</span></a>
             <a href="#">
@@ -55,6 +55,11 @@
 <div class="main-content">
     <h1> MediRecords </h1>
     <p>Strona główna aplikacji do zarządzania danymi medycznymi wykonanej w ramach pracy magisterskiej</p>
+
+    <br/>
+    <div>
+        <span th:if="${message != null}" th:text="${message}"></span>
+    </div>
 </div>
 
 

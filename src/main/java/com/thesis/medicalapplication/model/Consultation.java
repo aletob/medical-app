@@ -3,6 +3,7 @@ package com.thesis.medicalapplication.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -20,7 +21,6 @@ public class Consultation {
     @Column(name = "consultation_id")
     private int consultationId;
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -37,9 +37,13 @@ public class Consultation {
     @Column(name = "answer", length = 512)
     private String answer;
 
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "question_date")
     private Date questionDate;
 
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "answer_date")
     private Date answerDate;
 }
