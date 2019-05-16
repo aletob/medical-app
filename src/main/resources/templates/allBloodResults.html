@@ -54,57 +54,43 @@
     </ul>
 </nav>
 <div class="main-content">
-    <div class="container">
-
-        <div class="row">
-            <div class="col-md-8">
-                <form th:action="@{/user/addRecord}" th:object="${record}" th:method="post">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Nazwa parametru" autofocus="autofocus" th:field="*{parameter}"/>
-                        <p th:if="${#fields.hasErrors('parameter')}" th:errors="*{parameter}" class="alert alert-danger"/>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="number" step="0.01" class="form-control" placeholder="Wartość parametru" autofocus="autofocus" th:field="*{value}"/>
-                        <p th:if="${#fields.hasErrors('value')}" th:errors="*{value}" class="alert alert-danger"/>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Jednostka" autofocus="autofocus" th:field="*{unit}"/>
-                        <p th:if="${#fields.hasErrors('unit')}" th:errors="*{unit}" class="alert alert-danger"/>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="number" step="0.01" class="form-control" placeholder="Norma" autofocus="autofocus" th:field="*{norm}"/>
-                        <p th:if="${#fields.hasErrors('norm')}" th:errors="*{norm}" class="alert alert-danger"/>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="date" class="form-control" placeholder="Data" autofocus="autofocus" th:field="*{date}"/>
-                        <p th:if="${#fields.hasErrors('date')}" th:errors="*{date}" class="alert alert-danger"/>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="time" class="form-control" placeholder="Godzina" autofocus="autofocus" th:field="*{time}"/>
-                        <p th:if="${#fields.hasErrors('time')}" th:errors="*{time}" class="alert alert-danger"/>
-                    </div>
-
-
-                    <button type="submit" class="btn btn-primary">
-                        Dodaj
-                    </button>
-
-                    <button class="btn">
-                        <a href="/user/homepage">Powrót</a>
-                    </button>
-
-                </form>
-
+    <div class="row">
+        <div class="col-md-10">
+            <div>
+                <a th:href="${'/user/addBloodResult'}" class="form-button">Dodaj nowy</a>
+                <br>
             </div>
 
+            <span th:if="${bloodResults.size() == 0}">
+                Brak zapisanych wyników
+            </span>
+            <table th:if="${bloodResults.size() > 0}" id="bootstrap-data-table" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>LP</th>
+                    <th>Parametr</th>
+                    <th>Wartość</th>
+                    <th>Jednostka</th>
+                    <th>Norma</th>
+                    <th>Data</th>
+                    <th>Godzina</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="bloodResult,iterationStatus  : ${bloodResults}">
+                    <td th:text="${iterationStatus.count}">1</td>
+                    <td th:text="${bloodResult.parameter}">001</td>
+                    <td th:text="${bloodResult.value}">Name</td>
+                    <td th:text="${bloodResult.unit}">Name</td>
+                    <td th:text="${bloodResult.norm}">Name</td>
+                    <td th:text="${bloodResult.date}">Name</td>
+                    <td th:text="${bloodResult.time}">Name</td>
+                    <td><a th:href="${'/user/deleteBloodResult?id='+bloodResult.resultId}">Usuń</a></td>
+                </tr>
+                </tbody>
+            </table>
         </div>
-
-
     </div>
 
 </div>

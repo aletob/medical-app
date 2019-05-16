@@ -42,9 +42,10 @@ public class MedicineController {
     }
 
     @GetMapping("/addMedicine")
-    public String addMedicineGet(Model model) {
+    public String addMedicineGet(Model model, HttpServletRequest request) {
         Medicine medicine = new Medicine();
         model.addAttribute("medicine", medicine);
+        model.addAttribute("user", request.getRemoteUser());
         return "addMedicine";
     }
 

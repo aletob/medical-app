@@ -2,13 +2,14 @@ package com.thesis.medicalapplication.service;
 
 import com.thesis.medicalapplication.model.User;
 import com.thesis.medicalapplication.model.UserRole;
-import com.thesis.medicalapplication.repository.RecordRepository;
+import com.thesis.medicalapplication.repository.BloodResultRepository;
 import com.thesis.medicalapplication.repository.RoleRepository;
 import com.thesis.medicalapplication.repository.UserRepository;
 import com.thesis.medicalapplication.repository.UserRoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class UserService {
     UserRoleRepository userRoleRepository;
 
     @Autowired
-    RecordRepository recordRepository;
+    BloodResultRepository bloodResultRepository;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -39,6 +40,7 @@ public class UserService {
         return userRepository.findUserById(id);
     }
 
+    @Transactional
     public void saveUser(User user) {
         try {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));

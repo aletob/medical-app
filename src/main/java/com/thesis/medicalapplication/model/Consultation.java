@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -32,10 +31,10 @@ public class Consultation {
     private Doctor doctor;
 
     @NotNull
-    @Column(name = "question")
+    @Column(name = "question", length = 512)
     private String question;
 
-    @Column(name = "answer")
+    @Column(name = "answer", length = 512)
     private String answer;
 
     @Column(name = "question_date")

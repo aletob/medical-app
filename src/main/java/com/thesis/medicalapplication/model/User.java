@@ -10,7 +10,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.Set;
 
 @Setter
@@ -46,7 +45,13 @@ public class User {
     Set<UserRole> userRoles;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    Set<Record> records;
+    Set<BloodResult> bloodResults;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    Set<BloodPressureResult> bloodPressureResults;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    Set<GeneralResult> generalResults;
 
     @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
     Patient patient;

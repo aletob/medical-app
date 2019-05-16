@@ -43,8 +43,9 @@ public class MedicalVisitController {
     }
 
     @GetMapping("/addVisit")
-    public String addMedicineGet(Model model) {
+    public String addMedicineGet(Model model, HttpServletRequest request) {
         model.addAttribute("visit", new MedicalVisit());
+        model.addAttribute("user", request.getRemoteUser());
         return "addVisit";
     }
 

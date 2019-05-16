@@ -27,6 +27,6 @@ public interface ConsultationRepository extends JpaRepository<Consultation, Inte
     List<Consultation> findNotAnsweredUserConsultation(@Param("user_id") int user_id);
 
     @Query(value = "Select * from consultation where user_id=:user_id and doctor_id=:doctor_id", nativeQuery = true)
-    List<Consultation> finUserDoctorHistory(@Param("user_id") int user_id, @Param("doctor_id") int doctor_id);
+    List<Consultation> findUserDoctorHistory(@Param("user_id") int user_id, @Param("doctor_id") int doctor_id);
 
 }

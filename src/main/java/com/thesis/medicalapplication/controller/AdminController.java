@@ -22,18 +22,6 @@ public class AdminController {
     @Autowired
     BugService bugService;
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    /*@PreAuthorize("hasRole('ROLE_ADMIN')")*/
-    @PostMapping("/admin/add")
-    public String addUserByAdmin(@RequestBody User user) {
-        String pwd = user.getPassword();
-        String encryptPwd = passwordEncoder.encode(pwd);
-        user.setPassword(encryptPwd);
-        userRepository.save(user);
-        return "User added successfully!";
-    }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/homepage")

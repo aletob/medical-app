@@ -6,7 +6,6 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -14,34 +13,34 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "medical_visit")
-public class MedicalVisit {
+@Table(name = "general_result")
+public class GeneralResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "visit_id")
-    private int visitId;
+    @Column(name = "result_id")
+    private int resultId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @NotNull(message = "Podaj datę wizyty")
+    @NotNull(message = "Podaj czego dotyczy wynik")
+    @Column(name = "parameter")
+    private String parameter;
+
+    @NotNull(message = "Podaj wynik badania")
+    @Column(name = "description", length = 512)
+    private String description;
+
+    @NotNull(message = "Podaj datę badania")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "date")
     private Date date;
 
-    @Column(name = "place")
-    private String place;
-
-    @NotNull(message = "Podaj lekarza")
-    @Column(name = "doctor")
-    private String doctor;
-
-    @Column(name = "specialization")
-    private String specialization;
-
-    @Column(name = "description", length = 512)
-    private String description;
+    @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
+    @Column(name = "time")
+    private Date time;
 }

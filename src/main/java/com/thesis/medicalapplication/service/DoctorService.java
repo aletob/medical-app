@@ -26,4 +26,5 @@ public class DoctorService {
     public Doctor getDoctorByUsername(String username){
         return userRepository.findByUsername(username).getDoctor();
     }
+
 }

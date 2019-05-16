@@ -1,9 +1,7 @@
 package com.thesis.medicalapplication.controller;
 
 import com.thesis.medicalapplication.model.Bug;
-import com.thesis.medicalapplication.model.Medicine;
 import com.thesis.medicalapplication.model.Patient;
-import com.thesis.medicalapplication.model.Record;
 import com.thesis.medicalapplication.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +18,7 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    RecordService recordService;
+    BloodResultService bloodResultService;
 
     @Autowired
     UserService userService;

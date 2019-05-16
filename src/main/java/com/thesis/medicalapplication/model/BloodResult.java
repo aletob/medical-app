@@ -6,7 +6,6 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -14,13 +13,13 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name = "record")
-public class Record {
+@Table(name = "blood_result")
+public class BloodResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "record_id")
-    private int recordId;
+    @Column(name = "result_id")
+    private int resultId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
