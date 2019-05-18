@@ -20,10 +20,21 @@ public class DoctorService {
     DoctorRepository doctorRepository;
 
     public void saveDoctor(Doctor doctor, String username){
-        User user = userRepository.findByUsername(username);
-        doctor.setUser(user);
-        doctor.setEnable(false);
-        doctorRepository.save(doctor);
+        Doctor doctorDB = doctorRepository.findDoctorByUserId(userRepository.findByUsername(username).getUserId()).orElse(null);
+        if(doctorDB != null){
+            doctorDB.setName(doctor.getName());
+            doctorDB.setSecondName(doctor.getSecondName());
+            doctorDB.setAddress(doctor.getAddress());
+            doctorDB.setHospital(doctor.getHospital());
+            doctorDB.setSpecialization(doctor.getSpecialization());
+            doctorRepository.save(doctorDB);
+
+        }else {
+            User user = userRepository.findByUsername(username);
+            doctor.setUser(user);
+            doctor.setEnable(false);
+            doctorRepository.save(doctor);
+        }
     }
 
     public Doctor getDoctorById(int id){

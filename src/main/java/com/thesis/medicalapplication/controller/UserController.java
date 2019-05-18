@@ -54,5 +54,12 @@ public class UserController {
         }
     }
 
+    @GetMapping("/patientAccountEdit")
+    public String patientAccountEdit(Model model, HttpServletRequest request) {
+        model.addAttribute("user", request.getRemoteUser());
+        model.addAttribute("patient", patientService.getPatientByUsername(request.getRemoteUser()));
+        return "patientForm";
+    }
+
 
 }

@@ -55,7 +55,7 @@
 </nav>
 <div class="main-content">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-8">
 
             <div th:if="${patient == null}">
                 <span> Brak informacji personalnych </span>
@@ -111,9 +111,9 @@
 
             </table>
 
-<!--            <div th:if="${patient != null}">
+            <div th:if="${patient != null}">
                 <a th:href="${'/user/patientAccountEdit'}" class="form-button">Edytuj</a>
-            </div>-->
+            </div>
 
         </div>
 

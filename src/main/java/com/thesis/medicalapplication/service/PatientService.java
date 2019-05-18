@@ -17,11 +17,31 @@ public class PatientService {
     @Autowired
     UserRepository userRepository;
 
-    @Transactional
+/*    @Transactional
     public void savePatient(Patient patient, String username){
         User user = userRepository.findByUsername(username);
         patient.setUser(user);
         patientRepository.save(patient);
+    }*/
+
+    @Transactional
+    public void savePatient(Patient patient, String username){
+        if(getPatientByUsername(username) != null){
+            int userId = userRepository.findByUsername(username).getUserId();
+            Patient patientDB =  patientRepository.findPatientByUserId(userId);
+            patientDB.setName(patient.getName());
+            patientDB.setSecondName(patient.getSecondName());
+            patientDB.setAddress(patient.getAddress());
+            patientDB.setAge(patient.getAge());
+            patientDB.setBloodType(patient.getBloodType());
+            patientDB.setHeight(patient.getHeight());
+            patientDB.setWeight(patient.getWeight());
+            patientRepository.save(patientDB);
+        }else {
+            User user = userRepository.findByUsername(username);
+            patient.setUser(user);
+            patientRepository.save(patient);
+        }
     }
 
     public Patient getPatientByUsername(String username){

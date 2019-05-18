@@ -55,4 +55,11 @@ public class DoctorController {
             return "redirect:/doctor/account";
         }
     }
+
+    @GetMapping("/accountEdit")
+    public String doctorAccountEdit(Model model, HttpServletRequest request) {
+        model.addAttribute("user", request.getRemoteUser());
+        model.addAttribute("doctor", doctorService.getDoctorByUsername(request.getRemoteUser()));
+        return "doctorForm";
+    }
 }
