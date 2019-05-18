@@ -28,7 +28,7 @@
     text-align: center;
     margin-bottom:5%;
     background: white;
-    border: 2px solid red;
+    border: 2px solid #b30000;
     color: black;
     border-radius: 4px;
     padding: 2%;
@@ -87,6 +87,7 @@ a:hover, a:focus, a:active{
     vertical-align: middle;
     margin-right: auto;
     margin-left: auto;
+    margin-bottom: 1%;
     text-decoration: none;
 
     background: white;
@@ -97,6 +98,30 @@ a:hover, a:focus, a:active{
 }
 
 .form-button-2:hover{
-    background: #999999;
     font-weight: bold;
+}
+
+.form-button-3{
+    display: inline-block;
+    width: 220px;
+    height: 40px;
+    padding: 6px;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 1%;
+
+    text-decoration: none;
+    background: #b3b3b3;
+    border: 2px solid #004d66;
+    color: black;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.button-panel{
+    margin-right: auto;
+    margin-right: auto;
+    text-align: center;
 }

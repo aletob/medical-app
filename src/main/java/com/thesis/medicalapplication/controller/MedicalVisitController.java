@@ -37,20 +37,20 @@ public class MedicalVisitController {
     }
 
     @RequestMapping(value = "/deleteVisit")
-    public String deleteMedicine(@RequestParam("id") Integer id) {
+    public String deleteVisit(@RequestParam("id") Integer id) {
         medicalVisitService.delete(id);
         return "redirect:/user/allVisits";
     }
 
     @GetMapping("/addVisit")
-    public String addMedicineGet(Model model, HttpServletRequest request) {
+    public String addVisitGet(Model model, HttpServletRequest request) {
         model.addAttribute("visit", new MedicalVisit());
         model.addAttribute("user", request.getRemoteUser());
         return "addVisit";
     }
 
     @RequestMapping(value = "/addVisit", method = RequestMethod.POST)
-    public String addMedicinePost(@Valid MedicalVisit visit, BindingResult bindingResult, HttpServletRequest request){
+    public String addVisitPost(@Valid MedicalVisit visit, BindingResult bindingResult, HttpServletRequest request){
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());

@@ -19,25 +19,29 @@ public class GeneralResultService {
     GeneralResultRepository generalResultRepository;
 
 
-    public void saveResult(GeneralResult generalResult, String username){
+    public void saveResult(GeneralResult generalResult, String username) {
         User user = userRepository.findByUsername(username);
         generalResult.setUser(user);
         generalResultRepository.save(generalResult);
     }
 
-    public GeneralResult findResultById(int id){
+    public GeneralResult findResultById(int id) {
         return generalResultRepository.findGeneralResultById(id);
     }
 
-    public List<GeneralResult> findResultsByUserId(int userId){
+    public List<GeneralResult> findResultsByUserId(int userId) {
         return generalResultRepository.findGeneralResultByUserId(userId);
     }
 
-    public List<GeneralResult> findAll(){
+    public List<GeneralResult> findResultsByUsername(String username) {
+        return generalResultRepository.findGeneralResultByUserId(userRepository.findByUsername(username).getUserId());
+    }
+
+    public List<GeneralResult> findAll() {
         return generalResultRepository.findAll();
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         generalResultRepository.deleteById(id);
     }
 }

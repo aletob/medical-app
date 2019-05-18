@@ -41,7 +41,6 @@
             <a href="/doctor/homepage"><span class="fas fa-home"></span><span class="nav-label">Strona główna</span></a>
             <a href="#"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
             <a href="#"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacje</span></a>
-            <a href="#"><span class="fas fa-exclamation-circle"></span><span class="nav-label">Zgłoś błąd</span></a>
             <a href="#">
                 <form action="#" th:action="@{/logout}" method="post" class="logout-form">
                     <span class="fas fa-sign-out-alt"></span>
@@ -54,7 +53,7 @@
 </nav>
 <div class="main-content">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-8">
 
             <div th:if="${doctor == null}">
                 <span> Brak informacji personalnych. Konto nieaktywne. Uzupełnij w celu weryfikacji.</span>

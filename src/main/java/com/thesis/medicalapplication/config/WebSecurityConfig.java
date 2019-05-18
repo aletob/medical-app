@@ -46,7 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().authorizeRequests().antMatchers("/doctor/**").authenticated().anyRequest().hasAnyRole("ADMIN", "DOCTOR")
                 .and().formLogin().loginPage("/index/login")
                 .successHandler(myAuthenticationSuccessHandler())
-                //.defaultSuccessUrl("/user/homepage")
                 .failureUrl("/index/login-error")
                 .permitAll()
                 .and()

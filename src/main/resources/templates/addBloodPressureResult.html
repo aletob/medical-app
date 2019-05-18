@@ -58,29 +58,24 @@
 
         <div class="row">
             <div class="col-md-8">
-                <form th:action="@{/user/addBloodResult}" th:object="${bloodResult}" th:method="post">
+                <form th:action="@{/user/addBloodPressureResult}" th:object="${bloodPressureResult}" th:method="post">
+
                     <div class="form-group">
-                        <label>Nazwa parametru</label>
-                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{parameter}"/>
-                        <p th:if="${#fields.hasErrors('parameter')}" th:errors="*{parameter}" class="alert alert-danger"/>
+                        <label>Ciśnienie skurczowe</label>
+                        <input type="number" class="form-control" autofocus="autofocus" th:field="*{systolic}"/>
+                        <p th:if="${#fields.hasErrors('systolic')}" th:errors="*{systolic}" class="alert alert-danger"/>
                     </div>
 
                     <div class="form-group">
-                        <label>Wartość</label>
-                        <input type="number" step="0.01" class="form-control" autofocus="autofocus" th:field="*{value}"/>
-                        <p th:if="${#fields.hasErrors('value')}" th:errors="*{value}" class="alert alert-danger"/>
+                        <label>Ciśnienie rozkurczowe</label>
+                        <input type="number" class="form-control" autofocus="autofocus" th:field="*{diastolic}"/>
+                        <p th:if="${#fields.hasErrors('diastolic')}" th:errors="*{diastolic}" class="alert alert-danger"/>
                     </div>
 
                     <div class="form-group">
-                        <label>Jednostka</label>
-                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{unit}"/>
-                        <p th:if="${#fields.hasErrors('unit')}" th:errors="*{unit}" class="alert alert-danger"/>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Norma</label>
-                        <input type="number" step="0.01" class="form-control" autofocus="autofocus" th:field="*{norm}"/>
-                        <p th:if="${#fields.hasErrors('norm')}" th:errors="*{norm}" class="alert alert-danger"/>
+                        <label>Puls</label>
+                        <input type="number" class="form-control" autofocus="autofocus" th:field="*{pulse}"/>
+                        <p th:if="${#fields.hasErrors('pulse')}" th:errors="*{pulse}" class="alert alert-danger"/>
                     </div>
 
                     <div class="form-group">
@@ -101,7 +96,7 @@
                     </button>
 
                     <button class="btn">
-                        <a href="/user/allBloodResults">Powrót</a>
+                        <a href="/user/allBloodPressureResults">Powrót</a>
                     </button>
 
                 </form>

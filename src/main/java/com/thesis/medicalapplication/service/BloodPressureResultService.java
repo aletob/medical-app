@@ -19,25 +19,29 @@ public class BloodPressureResultService {
     BloodPressureResultRepository bloodPressureResultRepository;
 
 
-    public void saveResult(BloodPressureResult bloodPressureResult, String username){
+    public void saveResult(BloodPressureResult bloodPressureResult, String username) {
         User user = userRepository.findByUsername(username);
         bloodPressureResult.setUser(user);
         bloodPressureResultRepository.save(bloodPressureResult);
     }
 
-    public BloodPressureResult findResultById(int id){
+    public BloodPressureResult findResultById(int id) {
         return bloodPressureResultRepository.findBloodPressureResultById(id);
     }
 
-    public List<BloodPressureResult> findResultsByUserId(int userId){
+    public List<BloodPressureResult> findResultsByUserId(int userId) {
         return bloodPressureResultRepository.findBloodPressureResultByUserId(userId);
     }
 
-    public List<BloodPressureResult> findAll(){
+    public List<BloodPressureResult> findResultsByUsername(String username) {
+        return bloodPressureResultRepository.findBloodPressureResultByUserId(userRepository.findByUsername(username).getUserId());
+    }
+
+    public List<BloodPressureResult> findAll() {
         return bloodPressureResultRepository.findAll();
     }
 
-    public void delete(int id){
+    public void delete(int id) {
         bloodPressureResultRepository.deleteById(id);
     }
 }

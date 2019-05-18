@@ -21,8 +21,6 @@ public class ApplicationController {
     @Autowired
     UserService userService;
 
-    @Autowired
-    BugService bugService;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -50,7 +48,6 @@ public class ApplicationController {
         model.addAttribute("message", "Niezalogowany");
         return "registration";
     }
-
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registerUser(@Valid User user, BindingResult bindingResult){

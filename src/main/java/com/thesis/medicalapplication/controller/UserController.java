@@ -18,46 +18,12 @@ import javax.validation.Valid;
 public class UserController {
 
     @Autowired
-    BloodResultService bloodResultService;
-
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    BugService bugService;
-
-    @Autowired
-    MedicineService medicineService;
-
-    @Autowired
     PatientService patientService;
 
     @GetMapping("/homepage")
     public String process(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         return "userHomepage";
-    }
-
-    @GetMapping("/addBug")
-    public String addBugGet(Model model, HttpServletRequest request) {
-        Bug bug = new Bug();
-        model.addAttribute("bug", bug);
-        model.addAttribute("user", request.getRemoteUser());
-        return "addBug";
-    }
-
-    @RequestMapping(value = "/addBug", method = RequestMethod.POST)
-    public String addBugPost(@Valid Bug bug, BindingResult bindingResult, HttpServletRequest request){
-        if (bindingResult.hasErrors()) {
-            bindingResult.getAllErrors().forEach(error -> {
-                System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
-            });
-            return "addBug";
-
-        } else {
-            bugService.saveBug(bug, request.getRemoteUser());
-            return "redirect:/user/homepage";
-        }
     }
 
     @GetMapping("/patientAccount")

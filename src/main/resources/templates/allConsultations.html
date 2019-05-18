@@ -61,10 +61,10 @@
                 <br/>
             </div>
 
-            <div th:if="${consultations.size() > 0}">
+            <div th:if="${consultations.size() > 0}" class="button-panel">
                 <a th:href="${'/user/allConsultation'}" class="form-button-2">Wyświetl wszystkie</a>
                 <a th:href="${'/user/allNotAnsweredConsultation'}" class="form-button-2">Wyświetl bez odpowiedzi</a>
-                <br>
+                <br/>
             </div>
             <br/>
 
