@@ -32,7 +32,22 @@ public class AdminController {
 
     @GetMapping("/allBugs")
     public String getAllBugs(Model model, HttpServletRequest request){
+        model.addAttribute("bugs", bugService.findAll());
+        model.addAttribute("user", request.getRemoteUser());
+        return "allBugs";
+    }
+
+    @GetMapping("/notFixedBugs")
+    public String getNotFixedBugs(Model model, HttpServletRequest request){
         model.addAttribute("bugs", bugService.findAllNotFixed());
+        model.addAttribute("user", request.getRemoteUser());
+        return "allBugs";
+    }
+
+    @RequestMapping(value = "/change")
+    public String changeBug(@RequestParam("id") Integer id, Model model, HttpServletRequest request) {
+        bugService.changeStatus(id);
+        model.addAttribute("bugs", bugService.findAll());
         model.addAttribute("user", request.getRemoteUser());
         return "allBugs";
     }

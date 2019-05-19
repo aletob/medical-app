@@ -34,4 +34,21 @@ public class BugService {
     public List<Bug> findAllNotFixed(){
         return bugRepository.findBugsNotFixed();
     }
+
+    public List<Bug> findAll(){
+        return bugRepository.findAll();
+    }
+
+    public void changeStatus(int id){
+        Bug bug = bugRepository.findById(id).orElse(null);
+        if(bug != null){
+            if(bug.isFixed()){
+                bug.setFixed(false);
+            }else{
+                bug.setFixed(true);
+            }
+            bugRepository.save(bug);
+        }
+    }
+
 }

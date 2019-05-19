@@ -54,6 +54,18 @@
 <div class="main-content">
     <div class="row">
         <div class="col-md-10">
+
+            <div th:if="${bugs.size() > 0}" class="button-panel">
+                <a th:href="${'/secure/allBugs'}" class="form-button-2">Wyświetl wszystkie</a>
+                <a th:href="${'/secure/notFixedBugs'}" class="form-button-2">Wyświetl nierozwiązane</a>
+                <br/>
+            </div>
+            <br/>
+
+            <span th:if="${bugs.size() == 0}">
+                Brak zgłoszonych błędów
+            </span>
+
             <table id="bootstrap-data-table" class="table table-striped table-bordered">
                 <thead>
                 <tr>
@@ -62,6 +74,7 @@
                     <th>Opis błędu</th>
                     <th>Użytkownik zgłaszający</th>
                     <th>Czy naprawiony?</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -71,6 +84,7 @@
                     <td th:text="${bug.description}">Name</td>
                     <td th:text="${bug.reportedUser.getUsername()}">Name</td>
                     <td th:text="${bug.fixed}">Name</td>
+                    <td><a th:href="${'/secure/change?id='+bug.bugId}" class="bug-button">Zmień status</a></td>
 
                 </tr>
                 </tbody>
