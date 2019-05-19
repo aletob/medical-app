@@ -17,13 +17,6 @@ public class PatientService {
     @Autowired
     UserRepository userRepository;
 
-/*    @Transactional
-    public void savePatient(Patient patient, String username){
-        User user = userRepository.findByUsername(username);
-        patient.setUser(user);
-        patientRepository.save(patient);
-    }*/
-
     @Transactional
     public void savePatient(Patient patient, String username){
         if(getPatientByUsername(username) != null){
@@ -46,6 +39,10 @@ public class PatientService {
 
     public Patient getPatientByUsername(String username){
         return userRepository.findByUsername(username).getPatient();
+    }
+
+    public Patient getPatientByUserId(int userId){
+        return patientRepository.findPatientByUserId(userId);
     }
 
 

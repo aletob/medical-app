@@ -69,4 +69,6 @@ public class ConsultationController {
         return "consultationDetails";
     }
 
+
+
 }

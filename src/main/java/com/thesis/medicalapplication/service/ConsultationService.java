@@ -68,4 +68,10 @@ public class ConsultationService {
         return consultationRepository.findNotAnsweredDoctorConsultation(doctorId);
     }
 
+    public List<Consultation> findConsultationHistory(String doctorUsername, int patientId){
+        int userId = userRepository.findByUsername(doctorUsername).getUserId();
+        int doctorId = doctorRepository.findDoctorByUserId(userId).orElse(null).getDoctorId();
+        return consultationRepository.findUserDoctorHistory(patientId, doctorId);
+    }
+
 }

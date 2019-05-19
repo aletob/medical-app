@@ -13,14 +13,14 @@ import java.util.List;
 public class BloodPressureResultService {
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @Autowired
     BloodPressureResultRepository bloodPressureResultRepository;
 
 
     public void saveResult(BloodPressureResult bloodPressureResult, String username) {
-        User user = userRepository.findByUsername(username);
+        User user = userService.findUserByUsername(username);
         bloodPressureResult.setUser(user);
         bloodPressureResultRepository.save(bloodPressureResult);
     }
@@ -34,7 +34,7 @@ public class BloodPressureResultService {
     }
 
     public List<BloodPressureResult> findResultsByUsername(String username) {
-        return bloodPressureResultRepository.findBloodPressureResultByUserId(userRepository.findByUsername(username).getUserId());
+        return bloodPressureResultRepository.findBloodPressureResultByUserId(userService.findUserByUsername(username).getUserId());
     }
 
     public List<BloodPressureResult> findAll() {

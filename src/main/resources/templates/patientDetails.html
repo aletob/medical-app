@@ -52,15 +52,64 @@
     </ul>
 </nav>
 <div class="main-content">
-    <h1> MediRecords </h1>
-    <p>Strona główna aplikacji do zarządzania danymi medycznymi wykonanej w ramach pracy magisterskiej</p>
+    <div class="row">
+        <div class="col-md-10">
 
-    <br/>
-    <div>
-        <span th:if="${message != null}" th:text="${message}"></span>
+            <div th:if="${patient == null}">
+                <span> Brak informacji personalnych </span>
+                <br/>
+            </div>
+
+            <table th:if="${patient != null}" id="bootstrap-data-table" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>Parametr</th>
+                    <th>Wartość</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>Imię</td>
+                    <td th:text="${patient.name}"></td>
+                </tr>
+                <tr>
+                    <td>Nazwisko</td>
+                    <td th:text="${patient.secondName}"></td>
+                </tr>
+                <tr>
+                    <td>Adres</td>
+                    <td th:text="${patient.address}"></td>
+                </tr>
+                <tr>
+                    <td>Wiek</td>
+                    <td th:text="${patient.age}"></td>
+                </tr>
+                <tr>
+                    <td>Wzrost</td>
+                    <td th:text="${patient.height}"></td>
+                </tr>
+                <tr>
+                    <td>Waga</td>
+                    <td th:text="${patient.weight}"></td>
+                </tr>
+                <tr>
+                    <td>Grupa krwi</td>
+                    <td th:text="${patient.bloodType}"></td>
+                </tr>
+
+                </tbody>
+            </table>
+
+            <div>
+                <br>
+                <a href="/doctor/allPatients" class="form-button">Powrót</a>
+            </div>
+
+        </div>
+
     </div>
 </div>
-
 
 </body>
 </html>

@@ -1,11 +1,9 @@
 package com.thesis.medicalapplication.service;
 
+import com.thesis.medicalapplication.model.Patient;
 import com.thesis.medicalapplication.model.User;
 import com.thesis.medicalapplication.model.UserRole;
-import com.thesis.medicalapplication.repository.BloodResultRepository;
-import com.thesis.medicalapplication.repository.RoleRepository;
-import com.thesis.medicalapplication.repository.UserRepository;
-import com.thesis.medicalapplication.repository.UserRoleRepository;
+import com.thesis.medicalapplication.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +22,9 @@ public class UserService {
     RoleRepository roleRepository;
 
     @Autowired
+    DoctorService doctorService;
+
+    @Autowired
     UserRoleRepository userRoleRepository;
 
     @Autowired
@@ -38,6 +39,10 @@ public class UserService {
 
     public User findUserById(int id) {
         return userRepository.findUserById(id);
+    }
+
+    public User findUserByUsername(String username){
+        return userRepository.findByUsername(username);
     }
 
     @Transactional
@@ -74,5 +79,10 @@ public class UserService {
         } else {
             return false;
         }
+    }
+
+    public List<User> findUsersForDoctor(String username){
+        int doctorId = doctorService.getDoctorByUsername(username).getDoctorId();
+        return userRepository.findUserForDoctor(doctorId);
     }
 }
