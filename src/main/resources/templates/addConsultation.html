@@ -62,12 +62,13 @@
 
                     <div class="form-group">
                         <label>Treść zapytania</label>
-                        <input type="text" class="form-control" autofocus="autofocus" th:field="*{question}"/>
+                        <textarea rows="8" class="form-control consultation-question" autofocus="autofocus" th:field="*{question}"></textarea>
+
                         <p th:if="${#fields.hasErrors('question')}" th:errors="*{question}" class="alert alert-danger"/>
                     </div>
 
                     <div class="form-group">
-                        <select th:field="*{doctor.doctorId}">
+                        <select th:field="*{doctor.doctorId}" class="consultation-select">
                             <option value="0" disabled="disabled" selected="selected">Proszę wybrać lekarza</option>
                             <option th:each="doctorOption : ${doctors}"
                                     th:value="${doctorOption.doctorId}"
