@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Aplikacja medyczna</title>
+
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/homepage.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/consultation.css}"/>
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+          crossorigin="anonymous">
+
+    <script th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
+
+</head>
+<body>
+<nav class="navbar navbar-global navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Aplikacja do zarządzania danymi medycznymi</a>
+        </div>
+        <div id="navbar" class="navbar-brand">
+            <ul class="nav navbar-nav navbar-user navbar-right">
+                <li>
+                    <a href="/doctor/account">
+                        <span class="fas fa-user-circle"></span>
+                        <span th:text="${user}"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<nav class="navbar-primary">
+    <ul class="navbar-primary-menu">
+        <li>
+            <a href="#"><span class="fas fa-home"></span><span class="nav-label">Strona główna</span></a>
+            <a href="/doctor/myPatients"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
+            <a href="#"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacje</span></a>
+            <a href="#">
+                <form action="#" th:action="@{/logout}" method="post" class="logout-form">
+                    <span class="fas fa-sign-out-alt"></span>
+                    <input type="submit" value="Wyloguj" class="nav-label input-button"/>
+                </form>
+            </a>
+
+        </li>
+    </ul>
+</nav>
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-10">
+
+            <div class="chat-window">
+                <div class="row msg_container base_sent">
+                    <div class="col-md-8">
+                        <div class="messages msg_sent">
+                            <p th:text="${consultation.question}"></p>
+                            <br>
+                            <span th:text="${user}"></span>
+                            <br>
+                            <span th:text="${consultation.questionDate}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:if="${consultation.answerDate != null}" class="row msg_container base_receive">
+                    <div class="col-md-8">
+                        <div class="messages msg_receive">
+                            <p th:text="${consultation.answer}"></p>
+                            <br>
+                            <span th:text="${consultation.doctor.getName()+' '+ consultation.doctor.getSecondName()}"></span>
+                            <br>
+                            <span th:text="${consultation.answerDate}"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:if="${consultation.answerDate == null}" class="row msg_container base_receive">
+                    <div class="col-md-8">
+                        <div class="messages msg_receive">
+                            <form th:action="@{/doctor/consultationAnswer}" th:object="${consultation}" th:method="post">
+                                <div class="form-group">
+                                    <textarea rows="10" class="form-control" placeholder="Odpowiedź" autofocus="autofocus" th:field="*{answer}"/></textarea>
+                                    <p th:if="${#fields.hasErrors('answer')}" th:errors="*{answer}" class="alert alert-danger"/>
+
+                                    <input type="hidden" th:field="*{consultationId}">
+                                    <input type="hidden" th:field="*{user}">
+                                    <input type="hidden" th:field="*{doctor}">
+                                    <input type="hidden" th:field="*{question}">
+                                    <input type="hidden" th:field="*{questionDate}">
+                                </div>
+
+                                <div class="form-group button-panel">
+                                    <input type="submit" class="btnSubmit form-button-2" value="Wyślij" />
+                                </div>
+                            </form>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+
+            </div>
+
+            <div>
+                <br>
+                <a href="/doctor/myConsultations" class="form-button">Powrót</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

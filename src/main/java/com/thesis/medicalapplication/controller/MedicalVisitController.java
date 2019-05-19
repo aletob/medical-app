@@ -32,7 +32,7 @@ public class MedicalVisitController {
     @GetMapping("/allFutureVisits")
     public String getAllFutureVisits(Model model, HttpServletRequest request){
         model.addAttribute("user", request.getRemoteUser());
-        model.addAttribute("visits", medicalVisitService.findAllUserVisits(request.getRemoteUser()));
+        model.addAttribute("visits", medicalVisitService.findFutureVisits(request.getRemoteUser()));
         return "allVisits";
     }
 

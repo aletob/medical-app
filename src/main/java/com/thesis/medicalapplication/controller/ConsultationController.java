@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -23,6 +24,13 @@ public class ConsultationController {
 
     @Autowired
     DoctorService doctorService;
+
+    @GetMapping("/allNotAnsweredConsultation")
+    public String getNotAnsweredConsultation(Model model, HttpServletRequest request){
+        model.addAttribute("user", request.getRemoteUser());
+        model.addAttribute("consultations", consultationService.findAllUserNotAnsweredUserConsultation(request.getRemoteUser()));
+        return "allConsultations";
+    }
 
     @GetMapping("/allConsultation")
     public String getAllConsultation(Model model, HttpServletRequest request){
@@ -51,6 +59,14 @@ public class ConsultationController {
             consultationService.saveConsultation(consultation, request.getRemoteUser());
             return "redirect:/user/allConsultation";
         }
+    }
+
+    @RequestMapping(value = "/consultation")
+    public String doctorDetails(@RequestParam("id") Integer id, Model model, HttpServletRequest request) {
+        Consultation consultation = consultationService.findConsultationById(id);
+        model.addAttribute("user", request.getRemoteUser());
+        model.addAttribute("consultation", consultation);
+        return "consultationDetails";
     }
 
 }

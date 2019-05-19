@@ -33,6 +33,11 @@ public class MedicalVisitService {
         return medicalVisitRepository.findPatientVisits(user.getUserId());
     }
 
+    public List<MedicalVisit> findFutureVisits(String username){
+        User user = userRepository.findByUsername(username);
+        return medicalVisitRepository.findPatientFutureVisits(user.getUserId());
+    }
+
     public MedicalVisit findVisitById(int id){
         return medicalVisitRepository.findVisitById(id);
     }

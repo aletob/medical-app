@@ -17,6 +17,6 @@ public interface MedicineRepository extends JpaRepository<Medicine, Integer> {
     @Query(value = "Select * from medicine where user_id=:userId", nativeQuery = true)
     List<Medicine> findMedicinesByUserId(@Param("userId") int userId);
 
-    @Query(value = "Select * from medicine where user_id=:userId and end_date is null", nativeQuery = true)
+    @Query(value = "Select * from medicine where user_id=:userId and (end_date IS NULL OR end_date > DATE(NOW()))", nativeQuery = true)
     List<Medicine> findCurrentMedicines(@Param("userId") int userId);
 }

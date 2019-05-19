@@ -17,7 +17,7 @@ public interface MedicalVisitRepository extends JpaRepository<MedicalVisit, Inte
     @Query(value = "Select * from medical_visit where user_id=:userId", nativeQuery = true)
     List<MedicalVisit> findPatientVisits(@Param("userId") int userId);
 
-    @Query(value = "Select * from medical_visit where specialization=:specialization and user_id=:userId", nativeQuery = true)
-    List<MedicalVisit> findVisitBySpecialization(@Param("specialization") String specialization, @Param("userId") int userId);
+    @Query(value = "Select * from medical_visit where user_id=:userId and date > DATE(NOW())", nativeQuery = true)
+    List<MedicalVisit> findPatientFutureVisits(@Param("userId") int userId);
 
 }

@@ -1,0 +1,50 @@
+.chat-window{
+    margin-left:auto;
+    margin-right: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+    background: #e5e5e5;
+    padding: 0 10px 10px;
+    overflow-x:hidden;
+}
+
+.msg_receive{
+    padding-left:0;
+    margin-left:0;
+}
+
+.msg_sent{
+    padding-bottom:20px !important;
+    margin-right:0;
+}
+
+.messages {
+    background: white;
+    padding: 10px;
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    max-width:100%;
+}
+.messages > p {
+    font-size: 13px;
+    margin: 0 0 0.2rem 0;
+}
+.messages > span {
+    font-size: 11px;
+    color: #ccc;
+}
+
+.msg_container {
+    padding: 10px;
+    overflow: hidden;
+    display: flex;
+}
+
+.base_sent {
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.msg_sent > span{
+    float: right;
+}

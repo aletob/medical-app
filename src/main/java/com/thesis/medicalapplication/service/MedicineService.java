@@ -38,8 +38,4 @@ public class MedicineService {
         return medicineRepository.findCurrentMedicines(user.getUserId());
     }
 
-    public Medicine findMedicineById(int id){
-        return medicineRepository.findMedicineById(id);
-    }
-
 }
