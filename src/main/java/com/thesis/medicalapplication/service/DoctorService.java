@@ -59,8 +59,19 @@ public class DoctorService {
         doctorRepository.save(doctor);
     }
 
-    public boolean checkIfAccountEnable(int id){
+    public boolean checkIfAccountEnable(String username){
+        int id = userRepository.findByUsername(username).getUserId();
         Doctor doctor = doctorRepository.findDoctorByUserIdIfEnable(id).orElse(null);
+        if(doctor != null){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean checkIfDataFill(String username){
+        int id = userRepository.findByUsername(username).getUserId();
+        Doctor doctor = doctorRepository.findDoctorByUserId(id).orElse(null);
         if(doctor != null){
             return true;
         }else {

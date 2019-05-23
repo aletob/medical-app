@@ -22,6 +22,8 @@ public class DoctorController {
     @PreAuthorize("hasAnyRole('DOCTOR', 'ADMIN')")
     @GetMapping("/homepage")
     public String doctorPage(Model model, HttpServletRequest request) {
+        model.addAttribute("enable", doctorService.checkIfAccountEnable(request.getRemoteUser()));
+        model.addAttribute("dataCompleted", doctorService.checkIfDataFill(request.getRemoteUser()));
         model.addAttribute("user", request.getRemoteUser());
         return "doctorHomepage";
     }

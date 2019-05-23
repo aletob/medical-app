@@ -120,6 +120,31 @@ a:hover, a:focus, a:active{
     border-radius: 8px;
 }
 
+.form-button-4{
+    display: inline-block;
+    padding: 6px;
+    text-align: center;
+    vertical-align: middle;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 1%;
+
+    text-decoration: none;
+    background: white;
+    border: 1px solid #004d66;
+    color: black;
+    border-radius: 8px;
+}
+
+.form-button-4:hover{
+    background: #e5e5e5;
+}
+
+.table-button{
+    text-align: center;
+    vertical-align: middle;
+}
+
 .button-panel{
     margin-right: auto;
     margin-right: auto;
@@ -211,3 +236,25 @@ a:hover, a:focus, a:active{
     transition-duration: 0.2s;
     border-radius: 8px;
 }
+
+.alert {
+    padding: 20px;
+    background-color: #ff4c4c;
+    color: white;
+}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.closebtn:hover {
+    color: black;
+    font-weight: bold;
+}
+

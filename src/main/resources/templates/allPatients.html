@@ -59,7 +59,7 @@
                 Brak przypisanych pacjentów
             </span>
 
-            <table id="bootstrap-data-table" class="table table-striped table-bordered">
+            <table th:if="${users.size() > 0}" id="bootstrap-data-table" class="table table-striped table-bordered">
                 <thead>
                 <tr>
                     <th>LP</th>
@@ -74,9 +74,9 @@
                 <tr th:each="singleUser,iterationStatus  : ${users}">
                     <td th:text="${iterationStatus.count}">1</td>
                     <td th:text="${singleUser.username}">Name</td>
-                    <td><a th:href="${'/doctor/patientDetails?id='+singleUser.userId}" class="form-button-2">Dane personalne</a></td>
-                    <td><a th:href="${'/doctor/patientBloodResults?id='+singleUser.userId}" class="form-button-2">Wyniki</a></td>
-                    <td><a th:href="${'/doctor/consultationHistory?id='+singleUser.userId}" class="form-button-2">Historia</a></td>
+                    <td class="table-button"><a th:href="${'/doctor/patientDetails?id='+singleUser.userId}" class="form-button-4">Dane osobowe</a></td>
+                    <td class="table-button"><a th:href="${'/doctor/patientBloodResults?id='+singleUser.userId}" class="form-button-4">Wyniki</a></td>
+                    <td class="table-button"><a th:href="${'/doctor/consultationHistory?id='+singleUser.userId}" class="form-button-4">Historia</a></td>
                 </tr>
                 </tbody>
             </table>

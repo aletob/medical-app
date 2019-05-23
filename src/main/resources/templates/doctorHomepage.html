@@ -39,8 +39,10 @@
     <ul class="navbar-primary-menu">
         <li>
             <a href="#"><span class="fas fa-home"></span><span class="nav-label">Strona główna</span></a>
-            <a href="/doctor/allPatients"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
-            <a href="/doctor/myConsultations"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacje</span></a>
+            <a href="/doctor/allPatients" th:if="${enable == true}"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
+            <a href="/doctor/myConsultations" th:if="${enable == true}"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacje</span></a>
+            <a href="#" th:if="${enable == false}"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
+            <a href="#" th:if="${enable == false}"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacje</span></a>
             <a href="#">
                 <form action="#" th:action="@{/logout}" method="post" class="logout-form">
                     <span class="fas fa-sign-out-alt"></span>
@@ -56,8 +58,12 @@
     <p>Strona główna aplikacji do zarządzania danymi medycznymi wykonanej w ramach pracy magisterskiej</p>
 
     <br/>
-    <div>
-        <span th:if="${message != null}" th:text="${message}"></span>
+    <div class="alert" th:if="${enable == false}">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <a href="/doctor/account" th:if="${dataCompleted == false}">
+            <span>Konto nieaktywne. <strong>Uzupełnij dane osobowe</strong> w celu weryfikacji.</span>
+        </a>
+        <span th:if="${dataCompleted == true}">Konto nieaktywne. Poczekaj na aktywację konta przez administratora.</span>
     </div>
 </div>
 
