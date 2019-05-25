@@ -43,6 +43,8 @@ public class ResultController {
     public String getAllUserBloodResult(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("bloodResults", bloodResultService.findResultsByUsername(request.getRemoteUser()));
+        model.addAttribute("parameters", bloodResultService.findUnionParameters(request.getRemoteUser()));
+
         return "allBloodResults";
     }
 
@@ -71,6 +73,20 @@ public class ResultController {
     public String deleteBloodResult(@RequestParam("id") Integer id) {
         bloodResultService.delete(id);
         return "redirect:/user/allBloodResults";
+    }
+
+    @RequestMapping(value = "/allBloodResults", method = RequestMethod.POST)
+    public String allBloodResultsPost(@RequestParam String parameter, HttpServletRequest request, Model model) {
+        model.addAttribute("user", request.getRemoteUser());
+        model.addAttribute("parameters", bloodResultService.findUnionParameters(request.getRemoteUser()));
+
+        if (parameter == null) {
+            model.addAttribute("bloodResults", bloodResultService.findResultsByUsername(request.getRemoteUser()));
+        } else {
+            model.addAttribute("filtred", true);
+            model.addAttribute("bloodResults", bloodResultService.findBloodResultByParameter(parameter, request.getRemoteUser()));
+        }
+        return "allBloodResults";
     }
 
 

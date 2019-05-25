@@ -35,7 +35,16 @@ public class BloodResultService {
     }
 
     public List<BloodResult> findResultsByUsername(String username){
-        return bloodResultRepository.findBloodResultByUserId(userRepository.findByUsername(username).getUserId());}
+        return bloodResultRepository.findBloodResultByUserId(userRepository.findByUsername(username).getUserId());
+    }
+
+    public List<BloodResult> findBloodResultByParameter(String parameter, String username){
+        return bloodResultRepository.findBloodResultByParameter(parameter, userRepository.findByUsername(username).getUserId());
+    }
+
+    public List<String> findUnionParameters(String username){
+        return bloodResultRepository.findUnionParameters(userRepository.findByUsername(username).getUserId());
+    }
 
     public List<BloodResult> findAll(){
         return bloodResultRepository.findAll();

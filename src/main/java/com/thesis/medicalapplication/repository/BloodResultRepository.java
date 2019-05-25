@@ -20,4 +20,7 @@ public interface BloodResultRepository extends JpaRepository<BloodResult, Intege
     @Query(value = "Select * from blood_result where parameter=:parameter and user_id=:userId", nativeQuery = true)
     List<BloodResult> findBloodResultByParameter(@Param("parameter") String parameter, @Param("userId") int userId);
 
+    @Query(value = "Select distinct(parameter) from blood_result where user_id=:userId", nativeQuery = true)
+    List<String> findUnionParameters(@Param("userId") int userId);
+
 }
