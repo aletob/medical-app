@@ -1,6 +1,5 @@
 package com.thesis.medicalapplication.service;
 
-import com.thesis.medicalapplication.model.Patient;
 import com.thesis.medicalapplication.model.User;
 import com.thesis.medicalapplication.model.UserRole;
 import com.thesis.medicalapplication.repository.*;
@@ -45,6 +44,11 @@ public class UserService {
         return userRepository.findByUsername(username);
     }
 
+    public User findUserByEmail(String email){
+        return userRepository.findByEmail(email);
+    }
+
+
     @Transactional
     public void saveUser(User user) {
         try {
@@ -85,4 +89,11 @@ public class UserService {
         int doctorId = doctorService.getDoctorByUsername(username).getDoctorId();
         return userRepository.findUserForDoctor(doctorId);
     }
+
+    public void updatePassword(String password, int userId) {
+        User userDB = userRepository.findUserById(userId);
+        userDB.setPassword(bCryptPasswordEncoder.encode(password));
+        userRepository.save(userDB);
+    }
+
 }
