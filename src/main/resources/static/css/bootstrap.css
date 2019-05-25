@@ -270,3 +270,9 @@ a:hover, a:focus, a:active{
     font-weight: bold;
 }
 
+#chart{
+    width: 550px;
+    height: 400px;
+    margin: 0 auto;
+}
+

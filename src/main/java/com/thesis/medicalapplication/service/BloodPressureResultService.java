@@ -33,6 +33,10 @@ public class BloodPressureResultService {
         return bloodPressureResultRepository.findBloodPressureResultByUserId(userId);
     }
 
+    public List<BloodPressureResult> findResultsWithDate(String username) {
+        return bloodPressureResultRepository.findBloodPressureResultWithDate(userService.findUserByUsername(username).getUserId());
+    }
+
     public List<BloodPressureResult> findResultsByUsername(String username) {
         return bloodPressureResultRepository.findBloodPressureResultByUserId(userService.findUserByUsername(username).getUserId());
     }
