@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,18 +21,18 @@ public class MedicalVisitController {
     MedicalVisitService medicalVisitService;
 
 
-    @GetMapping("/allVisits")
+    @RequestMapping("/allVisits")
     public String getAllVisits(Model model, HttpServletRequest request){
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("visits", medicalVisitService.findAllUserVisits(request.getRemoteUser()));
-        return "allVisits";
+        return "user/allVisits";
     }
 
-    @GetMapping("/allFutureVisits")
+    @RequestMapping("/allFutureVisits")
     public String getAllFutureVisits(Model model, HttpServletRequest request){
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("visits", medicalVisitService.findFutureVisits(request.getRemoteUser()));
-        return "allVisits";
+        return "user/allVisits";
     }
 
     @RequestMapping(value = "/deleteVisit")
@@ -42,11 +41,11 @@ public class MedicalVisitController {
         return "redirect:/user/allVisits";
     }
 
-    @GetMapping("/addVisit")
+    @RequestMapping("/addVisit")
     public String addVisitGet(Model model, HttpServletRequest request) {
         model.addAttribute("visit", new MedicalVisit());
         model.addAttribute("user", request.getRemoteUser());
-        return "addVisit";
+        return "user/addVisit";
     }
 
     @RequestMapping(value = "/addVisit", method = RequestMethod.POST)
@@ -55,7 +54,7 @@ public class MedicalVisitController {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
-            return "addVisit";
+            return "user/addVisit";
 
         } else {
             medicalVisitService.saveVisit(visit, request.getRemoteUser());

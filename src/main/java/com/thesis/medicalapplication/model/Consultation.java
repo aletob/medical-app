@@ -30,7 +30,7 @@ public class Consultation {
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @NotNull
+    @NotNull(message = "Wpisz pytanie")
     @Column(name = "question", length = 512)
     private String question;
 

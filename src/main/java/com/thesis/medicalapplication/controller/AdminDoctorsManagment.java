@@ -5,7 +5,6 @@ import com.thesis.medicalapplication.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,11 +17,11 @@ public class AdminDoctorsManagment {
     @Autowired
     DoctorService doctorService;
 
-    @GetMapping("/disabledAccounts")
+    @RequestMapping("/disabledAccounts")
     public String getAllDisabledAccounts(Model model, HttpServletRequest request){
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("doctors", doctorService.getAllDiasabled());
-        return "disabledAccounts";
+        return "admin/disabledAccounts";
     }
 
     @RequestMapping(value = "/doctor")
@@ -30,7 +29,7 @@ public class AdminDoctorsManagment {
         Doctor doctor = doctorService.getDoctorById(id);
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("doctor", doctor);
-        return "secureDoctorView";
+        return "admin/secureDoctorView";
     }
 
     @RequestMapping(value = "/enable")
@@ -38,6 +37,6 @@ public class AdminDoctorsManagment {
         doctorService.enableAccount(id);
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("doctors", doctorService.getAllDiasabled());
-        return "disabledAccounts";
+        return "admin/disabledAccounts";
     }
 }

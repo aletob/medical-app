@@ -1,6 +1,5 @@
 package com.thesis.medicalapplication.service;
 
-
 import com.thesis.medicalapplication.model.User;
 import com.thesis.medicalapplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

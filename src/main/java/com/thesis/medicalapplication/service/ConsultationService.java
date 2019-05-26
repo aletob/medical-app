@@ -3,8 +3,6 @@ package com.thesis.medicalapplication.service;
 import com.thesis.medicalapplication.model.Consultation;
 import com.thesis.medicalapplication.model.User;
 import com.thesis.medicalapplication.repository.ConsultationRepository;
-import com.thesis.medicalapplication.repository.DoctorRepository;
-import com.thesis.medicalapplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +16,18 @@ public class ConsultationService {
     ConsultationRepository consultationRepository;
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @Autowired
-    DoctorRepository doctorRepository;
+    DoctorService doctorService;
 
     public List<Consultation> findAllUserConsultations(String username){
-        User user = userRepository.findByUsername(username);
+        User user = userService.findUserByUsername(username);
         return consultationRepository.findAllUserConsultation(user.getUserId());
     }
 
     public List<Consultation> findAllUserNotAnsweredUserConsultation(String username){
-        User user = userRepository.findByUsername(username);
+        User user = userService.findUserByUsername(username);
         return consultationRepository.findNotAnsweredUserConsultation(user.getUserId());
     }
 
@@ -44,7 +42,7 @@ public class ConsultationService {
             consultationDB.setAnswerDate(new Date());
             consultationRepository.save(consultationDB);
         }else{
-            User user = userRepository.findByUsername(username);
+            User user = userService.findUserByUsername(username);
             consultation.setUser(user);
             Date date = new Date();
             consultation.setQuestionDate(date);
@@ -57,20 +55,20 @@ public class ConsultationService {
     }
 
     public List<Consultation> findAllDoctorConsultations(String username){
-        int userId = userRepository.findByUsername(username).getUserId();
-        int doctorId = doctorRepository.findDoctorByUserId(userId).orElse(null).getDoctorId();
+        int userId = userService.findUserByUsername(username).getUserId();
+        int doctorId = doctorService.getDoctorByUserId(userId).getDoctorId();
         return consultationRepository.findAllDoctorConsultation(doctorId);
     }
 
     public List<Consultation> findNotAnsweredDoctorConsultations(String username){
-        int userId = userRepository.findByUsername(username).getUserId();
-        int doctorId = doctorRepository.findDoctorByUserId(userId).orElse(null).getDoctorId();
+        int userId = userService.findUserByUsername(username).getUserId();
+        int doctorId = doctorService.getDoctorByUserId(userId).getDoctorId();
         return consultationRepository.findNotAnsweredDoctorConsultation(doctorId);
     }
 
     public List<Consultation> findConsultationHistory(String doctorUsername, int patientId){
-        int userId = userRepository.findByUsername(doctorUsername).getUserId();
-        int doctorId = doctorRepository.findDoctorByUserId(userId).orElse(null).getDoctorId();
+        int userId = userService.findUserByUsername(doctorUsername).getUserId();
+        int doctorId = doctorService.getDoctorByUserId(userId).getDoctorId();
         return consultationRepository.findUserDoctorHistory(patientId, doctorId);
     }
 

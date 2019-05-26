@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,18 +24,18 @@ public class DoctorConsultationsController {
     @Autowired
     ConsultationService consultationService;
 
-    @GetMapping("/myConsultations")
+    @RequestMapping("/myConsultations")
     public String getAllConsultations(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("consultations", consultationService.findAllDoctorConsultations(request.getRemoteUser()));
-        return "doctorConsultations";
+        return "doctor/doctorConsultations";
     }
 
-    @GetMapping("/myNotAnsweredConsultations")
+    @RequestMapping("/myNotAnsweredConsultations")
     public String getNotAnsweredConsultations(Model model, HttpServletRequest request){
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("consultations", consultationService.findNotAnsweredDoctorConsultations(request.getRemoteUser()));
-        return "doctorConsultations";
+        return "doctor/doctorConsultations";
     }
 
     @RequestMapping(value = "/consultation")
@@ -44,7 +43,7 @@ public class DoctorConsultationsController {
         Consultation consultation = consultationService.findConsultationById(id);
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("consultation", consultation);
-        return "doctorConsultationDetails";
+        return "doctor/doctorConsultationDetails";
     }
 
     @RequestMapping(value = "/consultationAnswer", method = RequestMethod.POST)
@@ -53,7 +52,7 @@ public class DoctorConsultationsController {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
-            return "doctorConsultationDetails";
+            return "doctor/doctorConsultationDetails";
 
         } else {
             consultationService.saveConsultation(consultation, request.getRemoteUser());

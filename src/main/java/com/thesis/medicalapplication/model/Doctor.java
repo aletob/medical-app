@@ -24,11 +24,11 @@ public class Doctor {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @NotNull
+    @NotNull(message = "Podaj imię")
     @Column(name = "name")
     private String name;
 
-    @NotNull
+    @NotNull(message = "Podaj nazwisko")
     @Column(name = "second_name")
     private String secondName;
 
@@ -38,7 +38,7 @@ public class Doctor {
     @Column(name = "hospital")
     private String hospital;
 
-    @NotNull
+    @NotNull(message = "Podaj specjalizację")
     @Column(name = "specialization")
     private String specialization;
 

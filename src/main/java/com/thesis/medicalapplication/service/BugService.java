@@ -3,13 +3,9 @@ package com.thesis.medicalapplication.service;
 import com.thesis.medicalapplication.model.Bug;
 import com.thesis.medicalapplication.model.User;
 import com.thesis.medicalapplication.repository.BugRepository;
-import com.thesis.medicalapplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -20,10 +16,10 @@ public class BugService {
     BugRepository bugRepository;
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     public void saveBug(Bug bug, String username){
-        User user = userRepository.findByUsername(username);
+        User user = userService.findUserByUsername(username);
         Date date = new Date();
         bug.setReportedUser(user);
         bug.setReportDate(date);

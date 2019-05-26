@@ -3,7 +3,6 @@ package com.thesis.medicalapplication.controller;
 import com.thesis.medicalapplication.model.Doctor;
 import com.thesis.medicalapplication.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,28 +18,26 @@ public class DoctorController {
     @Autowired
     DoctorService doctorService;
 
-    @PreAuthorize("hasAnyRole('DOCTOR', 'ADMIN')")
-    @GetMapping("/homepage")
+    @RequestMapping("/homepage")
     public String doctorPage(Model model, HttpServletRequest request) {
         model.addAttribute("enable", doctorService.checkIfAccountEnable(request.getRemoteUser()));
         model.addAttribute("dataCompleted", doctorService.checkIfDataFill(request.getRemoteUser()));
         model.addAttribute("user", request.getRemoteUser());
-        return "doctorHomepage";
+        return "doctor/doctorHomepage";
     }
 
-    @PreAuthorize("hasAnyRole('DOCTOR', 'ADMIN')")
-    @GetMapping("/account")
+    @RequestMapping("/account")
     public String doctorAccount(Model model, HttpServletRequest request){
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("doctor", doctorService.getDoctorByUsername(request.getRemoteUser()));
-        return "doctorAccount";
+        return "doctor/doctorAccount";
     }
 
-    @GetMapping("/accountAdd")
+    @RequestMapping("/accountAdd")
     public String doctorAccountSave(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("doctor", new Doctor());
-        return "doctorForm";
+        return "doctor/doctorForm";
     }
 
 
@@ -50,7 +47,7 @@ public class DoctorController {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
-            return "doctorForm";
+            return "doctor/doctorForm";
 
         } else {
             doctorService.saveDoctor(doctor, request.getRemoteUser());
@@ -58,10 +55,10 @@ public class DoctorController {
         }
     }
 
-    @GetMapping("/accountEdit")
+    @RequestMapping("/accountEdit")
     public String doctorAccountEdit(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("doctor", doctorService.getDoctorByUsername(request.getRemoteUser()));
-        return "doctorForm";
+        return "doctor/doctorForm";
     }
 }

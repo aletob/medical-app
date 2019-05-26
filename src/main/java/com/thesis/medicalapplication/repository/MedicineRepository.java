@@ -11,9 +11,6 @@ import java.util.List;
 @Repository
 public interface MedicineRepository extends JpaRepository<Medicine, Integer> {
 
-    @Query(value = "Select * from medicine where medicine_id=:id", nativeQuery = true)
-    Medicine findMedicineById(@Param("id") int id);
-
     @Query(value = "Select * from medicine where user_id=:userId", nativeQuery = true)
     List<Medicine> findMedicinesByUserId(@Param("userId") int userId);
 

@@ -4,7 +4,6 @@ import com.thesis.medicalapplication.model.Mail;
 import com.thesis.medicalapplication.model.PasswordResetToken;
 import com.thesis.medicalapplication.model.User;
 import com.thesis.medicalapplication.repository.PasswordResetTokenRepository;
-import com.thesis.medicalapplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +16,7 @@ public class PasswordResetTokenService {
     PasswordResetTokenRepository passwordResetTokenRepository;
 
     @Autowired
-    UserRepository userRepository;
+    UserService userService;
 
     @Autowired
     MailService emailService;
@@ -27,7 +26,7 @@ public class PasswordResetTokenService {
 
         PasswordResetToken token = new PasswordResetToken();
         token.setToken(UUID.randomUUID().toString());
-        User user = userRepository.findByEmail(email);
+        User user = userService.findUserByEmail(email);
         token.setUser(user);
         Calendar now = Calendar.getInstance();
         now.add(Calendar.MINUTE, 60);

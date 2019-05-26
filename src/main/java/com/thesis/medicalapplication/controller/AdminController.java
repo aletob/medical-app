@@ -2,7 +2,6 @@ package com.thesis.medicalapplication.controller;
 
 import com.thesis.medicalapplication.service.BugService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,25 +16,24 @@ public class AdminController {
     BugService bugService;
 
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
-    @GetMapping("/homepage")
+    @RequestMapping("/homepage")
     public String adminPage(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
-        return "adminHomepage";
+        return "admin/adminHomepage";
     }
 
-    @GetMapping("/allBugs")
+    @RequestMapping("/allBugs")
     public String getAllBugs(Model model, HttpServletRequest request){
         model.addAttribute("bugs", bugService.findAll());
         model.addAttribute("user", request.getRemoteUser());
-        return "allBugs";
+        return "admin/allBugs";
     }
 
-    @GetMapping("/notFixedBugs")
+    @RequestMapping("/notFixedBugs")
     public String getNotFixedBugs(Model model, HttpServletRequest request){
         model.addAttribute("bugs", bugService.findAllNotFixed());
         model.addAttribute("user", request.getRemoteUser());
-        return "allBugs";
+        return "admin/allBugs";
     }
 
     @RequestMapping(value = "/change")
@@ -43,6 +41,6 @@ public class AdminController {
         bugService.changeStatus(id);
         model.addAttribute("bugs", bugService.findAll());
         model.addAttribute("user", request.getRemoteUser());
-        return "allBugs";
+        return "admin/allBugs";
     }
 }

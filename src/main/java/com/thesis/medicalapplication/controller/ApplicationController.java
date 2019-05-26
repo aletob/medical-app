@@ -1,8 +1,6 @@
 package com.thesis.medicalapplication.controller;
 
-import com.thesis.medicalapplication.model.Bug;
 import com.thesis.medicalapplication.model.User;
-import com.thesis.medicalapplication.service.BugService;
 import com.thesis.medicalapplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 
@@ -22,23 +19,23 @@ public class ApplicationController {
     UserService userService;
 
 
-    @GetMapping("/")
+    @RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("message", "Niezalogowany");
-        return "index";
+        return "all/index";
     }
 
     @RequestMapping("/login")
     public String login(Model model) {
         model.addAttribute("message", "Niezalogowany");
-        return "mylogin";
+        return "all/mylogin";
     }
 
     @RequestMapping("/login-error")
     public String loginError(Model model) {
         model.addAttribute("message", "Niezalogowany");
         model.addAttribute("loginerror", true);
-        return "mylogin";
+        return "all/mylogin";
     }
 
     @RequestMapping("/registration")
@@ -46,7 +43,7 @@ public class ApplicationController {
         User user = new User();
         model.addAttribute("user", user);
         model.addAttribute("message", "Niezalogowany");
-        return "registration";
+        return "all/registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
@@ -55,12 +52,12 @@ public class ApplicationController {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
-            return "registration";
+            return "all/registration";
 
         }
         else if(userService.isUserAlreadyPresent(user)){
             bindingResult.rejectValue("username", null, "Użytkownik o takim nicku już istnieje");
-            return "registration";
+            return "all/registration";
         }
         else {
             userService.saveUser(user);
@@ -73,7 +70,7 @@ public class ApplicationController {
         User user = new User();
         model.addAttribute("user", user);
         model.addAttribute("message", "Niezalogowany");
-        return "doctorRegistration";
+        return "all/doctorRegistration";
     }
 
     @RequestMapping(value = "/doctorRegistration", method = RequestMethod.POST)
@@ -82,12 +79,12 @@ public class ApplicationController {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
-            return "doctorRegistration";
+            return "all/doctorRegistration";
 
         }
         else if(userService.isUserAlreadyPresent(user)){
             bindingResult.rejectValue("username", null, "Użytkownik o takim nicku już istnieje");
-            return "doctorRegistration";
+            return "all/doctorRegistration";
         }
         else {
             userService.saveUserDoctor(user);

@@ -1,6 +1,5 @@
 package com.thesis.medicalapplication.controller;
 
-import com.thesis.medicalapplication.model.Bug;
 import com.thesis.medicalapplication.model.Patient;
 import com.thesis.medicalapplication.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,24 +19,24 @@ public class UserController {
     @Autowired
     PatientService patientService;
 
-    @GetMapping("/homepage")
+    @RequestMapping("/homepage")
     public String process(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
-        return "userHomepage";
+        return "user/userHomepage";
     }
 
-    @GetMapping("/patientAccount")
+    @RequestMapping("/patientAccount")
     public String patientAccount(Model model, HttpServletRequest request){
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("patient", patientService.getPatientByUsername(request.getRemoteUser()));
-        return "patientAccount";
+        return "user/patientAccount";
     }
 
-    @GetMapping("/patientAccountAdd")
+    @RequestMapping("/patientAccountAdd")
     public String patientAccountSave(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("patient", new Patient());
-        return "patientForm";
+        return "user/patientForm";
     }
 
     @RequestMapping(value = "/patientAccountAdd", method = RequestMethod.POST)
@@ -46,7 +45,7 @@ public class UserController {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
-            return "patientForm";
+            return "user/patientForm";
 
         } else {
             patientService.savePatient(patient, request.getRemoteUser());
@@ -54,11 +53,11 @@ public class UserController {
         }
     }
 
-    @GetMapping("/patientAccountEdit")
+    @RequestMapping("/patientAccountEdit")
     public String patientAccountEdit(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("patient", patientService.getPatientByUsername(request.getRemoteUser()));
-        return "patientForm";
+        return "user/patientForm";
     }
 
 

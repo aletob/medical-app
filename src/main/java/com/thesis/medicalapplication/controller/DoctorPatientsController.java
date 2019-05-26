@@ -5,7 +5,6 @@ import com.thesis.medicalapplication.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -31,40 +30,40 @@ public class DoctorPatientsController {
     @Autowired
     BloodPressureResultService bloodPressureResultService;
 
-    @GetMapping("/allPatients")
+    @RequestMapping("/allPatients")
     public String getAllPatients(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         List<User> allUsers = userService.findUsersForDoctor(request.getRemoteUser());
         model.addAttribute("users", allUsers);
-        return "allPatients";
+        return "doctor/allPatients";
     }
 
     @RequestMapping(value = "/patientDetails")
     public String patientDetails(@RequestParam("id") Integer id, Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("patient", patientService.getPatientByUserId(id));
-        return "patientDetails";
+        return "doctor/patientDetails";
     }
 
     @RequestMapping(value = "/patientBloodResults")
     public String patientResults(@RequestParam("id") Integer id, Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("results", bloodResultService.findResultsByUserId(id));
-        return "patientBloodResults";
+        return "doctor/patientBloodResults";
     }
 
     @RequestMapping(value = "/patientBloodPressureResults")
     public String patientBloodPressureResults(@RequestParam("id") Integer id, Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("results", bloodPressureResultService.findResultsByUserId(id));
-        return "patientBloodPressureResults";
+        return "doctor/patientBloodPressureResults";
     }
 
     @RequestMapping(value = "/consultationHistory")
     public String consultationHistory(@RequestParam("id") Integer id, Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("consultations", consultationService.findConsultationHistory(request.getRemoteUser(), id));
-        return "consultationHistory";
+        return "doctor/consultationHistory";
     }
 
 }

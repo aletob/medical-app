@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,12 +19,12 @@ public class BugController {
     @Autowired
     BugService bugService;
 
-    @GetMapping("/addBug")
+    @RequestMapping("/addBug")
     public String addBugGet(Model model, HttpServletRequest request) {
         Bug bug = new Bug();
         model.addAttribute("bug", bug);
         model.addAttribute("user", request.getRemoteUser());
-        return "addBug";
+        return "user/addBug";
     }
 
     @RequestMapping(value = "/addBug", method = RequestMethod.POST)
@@ -34,7 +33,7 @@ public class BugController {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
-            return "addBug";
+            return "user/addBug";
 
         } else {
             bugService.saveBug(bug, request.getRemoteUser());

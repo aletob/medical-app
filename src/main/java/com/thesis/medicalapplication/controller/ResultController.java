@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,20 +38,20 @@ public class ResultController {
 
     // ---------------------- BloodResult ----------------------
 
-    @GetMapping("/allBloodResults")
+    @RequestMapping("/allBloodResults")
     public String getAllUserBloodResult(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("bloodResults", bloodResultService.findResultsByUsername(request.getRemoteUser()));
         model.addAttribute("parameters", bloodResultService.findUnionParameters(request.getRemoteUser()));
 
-        return "allBloodResults";
+        return "user/allBloodResults";
     }
 
-    @GetMapping("/addBloodResult")
+    @RequestMapping("/addBloodResult")
     public String addBloodResultGet(Model model, HttpServletRequest request) {
         model.addAttribute("bloodResult", new BloodResult());
         model.addAttribute("user", request.getRemoteUser());
-        return "addBloodResult";
+        return "user/addBloodResult";
     }
 
     @RequestMapping(value = "/addBloodResult", method = RequestMethod.POST)
@@ -61,7 +60,7 @@ public class ResultController {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
-            return "addBloodResult";
+            return "user/addBloodResult";
 
         } else {
             bloodResultService.saveResult(bloodResult, request.getRemoteUser());
@@ -86,24 +85,24 @@ public class ResultController {
             model.addAttribute("filtred", true);
             model.addAttribute("bloodResults", bloodResultService.findBloodResultByParameter(parameter, request.getRemoteUser()));
         }
-        return "allBloodResults";
+        return "user/allBloodResults";
     }
 
 
     // ---------------------- BloodPressureResult ----------------------
 
-    @GetMapping("/allBloodPressureResults")
+    @RequestMapping("/allBloodPressureResults")
     public String getAllUserBloodPressureResult(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("bloodPressureResults", bloodPressureResultService.findResultsByUsername(request.getRemoteUser()));
-        return "allBloodPressureResults";
+        return "user/allBloodPressureResults";
     }
 
-    @GetMapping("/addBloodPressureResult")
+    @RequestMapping("/addBloodPressureResult")
     public String addBloodPressureResultGet(Model model, HttpServletRequest request) {
         model.addAttribute("bloodPressureResult", new BloodPressureResult());
         model.addAttribute("user", request.getRemoteUser());
-        return "addBloodPressureResult";
+        return "user/addBloodPressureResult";
     }
 
     @RequestMapping(value = "/addBloodPressureResult", method = RequestMethod.POST)
@@ -112,7 +111,7 @@ public class ResultController {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
-            return "addBloodPressureResult";
+            return "user/addBloodPressureResult";
 
         } else {
             bloodPressureResultService.saveResult(bloodPressureResult, request.getRemoteUser());
@@ -141,24 +140,24 @@ public class ResultController {
         model.addAttribute("systolic", mapSystolic);
         model.addAttribute("user", request.getRemoteUser());
 
-        return "bloodPressureChart";
+        return "user/bloodPressureChart";
     }
 
 
     // ---------------------- GeneralResult ----------------------
 
-    @GetMapping("/allGeneralResults")
+    @RequestMapping("/allGeneralResults")
     public String getAllGeneralResult(Model model, HttpServletRequest request) {
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("generalResults", generalResultService.findResultsByUsername(request.getRemoteUser()));
-        return "allGeneralResults";
+        return "user/allGeneralResults";
     }
 
-    @GetMapping("/addGeneralResult")
+    @RequestMapping("/addGeneralResult")
     public String addGeneralResultGet(Model model, HttpServletRequest request) {
         model.addAttribute("generalResult", new GeneralResult());
         model.addAttribute("user", request.getRemoteUser());
-        return "addGeneralResult";
+        return "user/addGeneralResult";
     }
 
     @RequestMapping(value = "/addGeneralResult", method = RequestMethod.POST)
@@ -167,7 +166,7 @@ public class ResultController {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
-            return "addGeneralResult";
+            return "user/addGeneralResult";
 
         } else {
             generalResultService.saveResult(generalResult, request.getRemoteUser());

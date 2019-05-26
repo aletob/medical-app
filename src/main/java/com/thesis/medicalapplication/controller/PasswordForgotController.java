@@ -27,7 +27,7 @@ public class PasswordForgotController {
     @RequestMapping("/forgotPassword")
     public String displayForgotPasswordPage(Model model) {
         model.addAttribute("message", "Niezalogowany");
-        return "forgotPassword";
+        return "all/forgotPassword";
     }
 
     @RequestMapping(value = "/forgotPassword", method = RequestMethod.POST)
@@ -38,7 +38,7 @@ public class PasswordForgotController {
         User user = userService.findUserByEmail(email);
         if (user == null) {
             model.addAttribute("errorMessage", "Nie znaleziono użytkownika o takim adresie email");
-            return "forgotPassword";
+            return "all/forgotPassword";
         }
         String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
         tokenService.reset(email, url);

@@ -40,7 +40,7 @@ public class PasswordResetController {
         } else {
             model.addAttribute("token", resetToken.getToken());
         }
-        return "resetPassword";
+        return "all/resetPassword";
     }
 
 
@@ -53,7 +53,7 @@ public class PasswordResetController {
         if (password == null || password.length() <5) {
             model.addAttribute("errorMessage", "Nieprawidłowe hasło (min. 5 znaków)");
             model.addAttribute("token", token);
-            return "resetPassword";
+            return "all/resetPassword";
         }
 
         PasswordResetToken tokenDB = tokenService.findByToken(token);

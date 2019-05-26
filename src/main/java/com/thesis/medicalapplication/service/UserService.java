@@ -27,18 +27,8 @@ public class UserService {
     UserRoleRepository userRoleRepository;
 
     @Autowired
-    BloodResultRepository bloodResultRepository;
-
-    @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    public User findUserById(int id) {
-        return userRepository.findUserById(id);
-    }
 
     public User findUserByUsername(String username){
         return userRepository.findByUsername(username);
