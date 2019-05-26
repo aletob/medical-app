@@ -91,7 +91,7 @@
                     <td th:text="${consultation.doctor.getName()}">Name</td>
                     <td th:text="${consultation.answerDate}">Name</td>
                     <td th:text="${consultation.answer}">Name</td>
-                    <td><a th:href="${'/user/consultation?id='+consultation.consultationId}">Podgląd</a></td>
+                    <td><a th:href="${'/user/consultation?id='+consultation.consultationId}" class="filter-button">Podgląd</a></td>
                 </tr>
                 </tbody>
             </table>

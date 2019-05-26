@@ -76,14 +76,16 @@
                             </option>
 
                         </select>
+                        <p th:if="${#fields.hasErrors('doctor')}" th:errors="*{doctor}" class="alert alert-danger"/>
+
                     </div>
 
                     <button type="submit" class="btn btn-primary">
                         Wyślij
                     </button>
 
-                    <button class="btn">
-                        <a href="/user/homepage">Powrót</a>
+                    <button class="filter-button">
+                        <a href="/user/allConsultation">Powrót</a>
                     </button>
 
                 </form>

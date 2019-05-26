@@ -47,11 +47,13 @@ public class ConsultationController {
     }
 
     @RequestMapping(value = "/addConsultation", method = RequestMethod.POST)
-    public String addConsultationPost(@Valid Consultation consultation, BindingResult bindingResult, HttpServletRequest request){
+    public String addConsultationPost(@Valid Consultation consultation, BindingResult bindingResult, HttpServletRequest request, Model model){
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
+            model.addAttribute("doctors", doctorService.getAllEnabled());
+            model.addAttribute("user", request.getRemoteUser());
             return "user/addConsultation";
 
         } else {

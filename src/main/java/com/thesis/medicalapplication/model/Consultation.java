@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
@@ -25,12 +26,12 @@ public class Consultation {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @NotNull
+    @NotNull(message = "Wybierz lekarza")
     @ManyToOne
     @JoinColumn(name = "doctor_id")
     private Doctor doctor;
 
-    @NotNull(message = "Wpisz pytanie")
+    @NotEmpty(message = "Wpisz pytanie")
     @Column(name = "question", length = 512)
     private String question;
 

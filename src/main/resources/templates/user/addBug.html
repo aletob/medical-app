@@ -61,7 +61,7 @@
 
                 <form th:action="@{/user/addBug}" th:object="${bug}" th:method="post">
                     <div class="form-group">
-                        <textarea rows="10" class="form-control bug-input" placeholder="Opis błędu" autofocus="autofocus" th:field="*{description}"/></textarea>
+                        <textarea rows="8" class="form-control bug-input" placeholder="Opis błędu" autofocus="autofocus" th:field="*{description}"/></textarea>
                         <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="alert alert-danger"/>
                     </div>
 
