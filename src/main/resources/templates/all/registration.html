@@ -49,7 +49,9 @@
     <div class="container login-container">
         <div class="row">
             <div class="login-form button-panel">
-                <h3>Strona rejestracji do aplikacji</h3>
+                <div><span class="fas fa-user-plus fa-3x" style="color: white"></span></div>
+                <br>
+                <h3>Rejestracja użytkownika</h3>
 
                 <form th:action="@{/index/registration}" th:object="${user}" th:method="post">
                     <div class="form-group">

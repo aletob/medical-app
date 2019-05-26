@@ -43,4 +43,10 @@ public class AdminController {
         model.addAttribute("user", request.getRemoteUser());
         return "admin/allBugs";
     }
+
+    @RequestMapping("/stats")
+    public String getStats(Model model, HttpServletRequest request){
+        model.addAttribute("user", request.getRemoteUser());
+        return "admin/stats";
+    }
 }

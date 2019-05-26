@@ -49,8 +49,9 @@
     <div class="container login-container">
         <div class="row">
             <div class="login-form col-md-6 button-panel">
+                <div><span class="fas fa-user-md fa-3x" style="color: white"></span></div>
+                <br>
                 <h3>Rejestracja lekarzy</h3>
-                <h6>W celu aktywacji konta, po rejestracji konieczne będzie uzupełnienie danych do weryfikacji</h6>
 
                 <form th:action="@{/index/doctorRegistration}" th:object="${user}" th:method="post">
                     <div class="form-group">
