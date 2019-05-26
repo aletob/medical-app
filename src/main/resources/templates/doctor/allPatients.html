@@ -38,8 +38,8 @@
 <nav class="navbar-primary">
     <ul class="navbar-primary-menu">
         <li>
-            <a href="#"><span class="fas fa-home"></span><span class="nav-label">Strona główna</span></a>
-            <a href="/doctor/allPatients"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
+            <a href="/doctor/homepage"><span class="fas fa-home"></span><span class="nav-label">Strona główna</span></a>
+            <a href="#" class="navbar-active"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
             <a href="/doctor/myConsultations"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacje</span></a>
             <a href="#">
                 <form action="#" th:action="@{/logout}" method="post" class="logout-form">
@@ -67,6 +67,7 @@
                     <th></th>
                     <th></th>
                     <th></th>
+                    <th></th>
                 </tr>
                 </thead>
 
@@ -74,9 +75,10 @@
                 <tr th:each="singleUser,iterationStatus  : ${users}">
                     <td th:text="${iterationStatus.count}">1</td>
                     <td th:text="${singleUser.username}">Name</td>
-                    <td class="table-button"><a th:href="${'/doctor/patientDetails?id='+singleUser.userId}" class="form-button-4">Dane osobowe</a></td>
-                    <td class="table-button"><a th:href="${'/doctor/patientBloodResults?id='+singleUser.userId}" class="form-button-4">Wyniki</a></td>
-                    <td class="table-button"><a th:href="${'/doctor/consultationHistory?id='+singleUser.userId}" class="form-button-4">Historia</a></td>
+                    <td class="table-button"><a th:href="${'/doctor/patientDetails?id='+singleUser.userId}" class="filter-button">Dane osobowe</a></td>
+                    <td class="table-button"><a th:href="${'/doctor/patientBloodResults?id='+singleUser.userId}" class="filter-button">Badania krwi</a></td>
+                    <td class="table-button"><a th:href="${'/doctor/patientBloodPressureResults?id='+singleUser.userId}" class="filter-button">Ciśnienie</a></td>
+                    <td class="table-button"><a th:href="${'/doctor/consultationHistory?id='+singleUser.userId}" class="filter-button">Konsultacje</a></td>
                 </tr>
                 </tbody>
             </table>

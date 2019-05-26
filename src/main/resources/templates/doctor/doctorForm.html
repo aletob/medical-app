@@ -39,8 +39,10 @@
     <ul class="navbar-primary-menu">
         <li>
             <a href="/doctor/homepage"><span class="fas fa-home"></span><span class="nav-label">Strona główna</span></a>
-            <a href="#"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
-            <a href="#"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacje</span></a>
+            <a href="/doctor/allPatients" th:if="${enable == true}"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
+            <a href="/doctor/myConsultations" th:if="${enable == true}"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacje</span></a>
+            <a href="#" th:if="${enable == false}"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
+            <a href="#" th:if="${enable == false}"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacje</span></a>
             <a href="#">
                 <form action="#" th:action="@{/logout}" method="post" class="logout-form">
                     <span class="fas fa-sign-out-alt"></span>
@@ -91,7 +93,7 @@
                         Dodaj
                     </button>
 
-                    <button class="btn">
+                    <button class="form-button-4">
                         <a href="/doctor/homepage">Powrót</a>
                     </button>
 

@@ -38,7 +38,7 @@
 <nav class="navbar-primary">
     <ul class="navbar-primary-menu">
         <li>
-            <a href="#"><span class="fas fa-home"></span><span class="nav-label">Strona główna</span></a>
+            <a href="/doctor/homepage"><span class="fas fa-home"></span><span class="nav-label">Strona główna</span></a>
             <a href="/doctor/allPatients"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
             <a href="/doctor/myConsultations"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacje</span></a>
             <a href="#">
@@ -52,12 +52,47 @@
     </ul>
 </nav>
 <div class="main-content">
-    <h1> MediRecords </h1>
-    <p>Strona główna aplikacji do zarządzania danymi medycznymi wykonanej w ramach pracy magisterskiej</p>
+    <div class="row">
+        <div class="col-md-10">
 
-    <br/>
-    <div>
-        <span th:if="${message != null}" th:text="${message}"></span>
+            <div th:if="${results.size() > 0}">
+                <span>Użytkownik: </span><span th:text="${results.get(0).getUser().username}" style="font-weight: bold"></span>
+                <br>
+            </div>
+
+            <span th:if="${results.size() == 0}">
+                Brak zapisanych wyników
+            </span>
+
+            <table th:if="${results.size() > 0}" id="bootstrap-data-table" class="table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>LP</th>
+                    <th>Skurczowe</th>
+                    <th>Rozkurczowe</th>
+                    <th>Puls</th>
+                    <th>Data</th>
+                    <th>Godzina</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="bloodPressureResult,iterationStatus  : ${results}">
+                    <td th:text="${iterationStatus.count}">1</td>
+                    <td th:text="${bloodPressureResult.diastolic}">001</td>
+                    <td th:text="${bloodPressureResult.systolic}">001</td>
+                    <td th:text="${bloodPressureResult.pulse}">001</td>
+                    <td th:text="${bloodPressureResult.date}">Name</td>
+                    <td th:text="${bloodPressureResult.time}">Name</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div>
+                <br>
+                <a href="/doctor/allPatients" class="form-button">Powrót</a>
+            </div>
+
+        </div>
     </div>
 </div>
 

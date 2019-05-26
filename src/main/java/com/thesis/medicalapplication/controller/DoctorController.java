@@ -28,6 +28,7 @@ public class DoctorController {
 
     @RequestMapping("/account")
     public String doctorAccount(Model model, HttpServletRequest request){
+        model.addAttribute("enable", doctorService.checkIfAccountEnable(request.getRemoteUser()));
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("doctor", doctorService.getDoctorByUsername(request.getRemoteUser()));
         return "doctor/doctorAccount";
@@ -35,6 +36,7 @@ public class DoctorController {
 
     @RequestMapping("/accountAdd")
     public String doctorAccountSave(Model model, HttpServletRequest request) {
+        model.addAttribute("enable", doctorService.checkIfAccountEnable(request.getRemoteUser()));
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("doctor", new Doctor());
         return "doctor/doctorForm";
@@ -42,11 +44,13 @@ public class DoctorController {
 
 
     @RequestMapping(value = "/accountAdd", method = RequestMethod.POST)
-    public String doctorAccountPost(@Valid Doctor doctor, BindingResult bindingResult, HttpServletRequest request){
+    public String doctorAccountPost(@Valid Doctor doctor, BindingResult bindingResult, HttpServletRequest request, Model model){
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error -> {
                 System.out.println(error.getObjectName() + " " + error.getDefaultMessage());
             });
+            model.addAttribute("enable", doctorService.checkIfAccountEnable(request.getRemoteUser()));
+            model.addAttribute("user", request.getRemoteUser());
             return "doctor/doctorForm";
 
         } else {
@@ -57,6 +61,7 @@ public class DoctorController {
 
     @RequestMapping("/accountEdit")
     public String doctorAccountEdit(Model model, HttpServletRequest request) {
+        model.addAttribute("enable", doctorService.checkIfAccountEnable(request.getRemoteUser()));
         model.addAttribute("user", request.getRemoteUser());
         model.addAttribute("doctor", doctorService.getDoctorByUsername(request.getRemoteUser()));
         return "doctor/doctorForm";

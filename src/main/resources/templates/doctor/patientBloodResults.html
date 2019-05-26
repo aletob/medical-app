@@ -38,7 +38,7 @@
 <nav class="navbar-primary">
     <ul class="navbar-primary-menu">
         <li>
-            <a href="#"><span class="fas fa-home"></span><span class="nav-label">Strona główna</span></a>
+            <a href="/doctor/homepage"><span class="fas fa-home"></span><span class="nav-label">Strona główna</span></a>
             <a href="/doctor/allPatients"><span class="fas fa-user-md"></span><span class="nav-label">Moi pacjenci</span></a>
             <a href="/doctor/myConsultations"><span class="fas fa-laptop-medical"></span><span class="nav-label">Telekonsultacje</span></a>
             <a href="#">
@@ -54,6 +54,11 @@
 <div class="main-content">
     <div class="row">
         <div class="col-md-10">
+
+            <div th:if="${results.size() > 0}">
+                <span>Użytkownik: </span><span th:text="${results.get(0).getUser().username}" style="font-weight: bold"></span>
+                <br>
+            </div>
 
             <span th:if="${results.size() == 0}">
                 Brak zapisanych wyników
