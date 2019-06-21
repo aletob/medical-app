@@ -14,9 +14,9 @@ public interface BloodPressureResultRepository extends JpaRepository<BloodPressu
     @Query(value = "Select * from blood_pressure_result where result_id=:id", nativeQuery = true)
     BloodPressureResult findBloodPressureResultById(@Param("id") int id);
 
-    @Query(value = "Select * from blood_pressure_result where user_id=:userId", nativeQuery = true)
+    @Query(value = "Select * from blood_pressure_result where user_id=:userId order by date", nativeQuery = true)
     List<BloodPressureResult> findBloodPressureResultByUserId(@Param("userId") int userId);
 
-    @Query(value = "Select * from blood_pressure_result where user_id=:userId and date is not null", nativeQuery = true)
+    @Query(value = "Select * from blood_pressure_result where user_id=:userId order by date asc", nativeQuery = true)
     List<BloodPressureResult> findBloodPressureResultWithDate(@Param("userId") int userId);
 }

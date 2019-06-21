@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/user")
@@ -128,8 +125,8 @@ public class ResultController {
     @RequestMapping(value = "displayGraph")
     public String graph(Model model, HttpServletRequest request){
         List<BloodPressureResult> results = bloodPressureResultService.findResultsWithDate(request.getRemoteUser());
-        Map<Date, Integer> mapDiastolic = new HashMap<>();
-        Map<Date, Integer> mapSystolic = new HashMap<>();
+        Map<Date, Integer> mapDiastolic = new LinkedHashMap<>();
+        Map<Date, Integer> mapSystolic = new LinkedHashMap<>();
 
         for(BloodPressureResult result: results){
             mapDiastolic.put(result.getDate(), result.getDiastolic());

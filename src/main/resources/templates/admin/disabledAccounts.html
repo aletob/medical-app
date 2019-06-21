@@ -74,7 +74,7 @@
                     <td th:text="${doctor.name}">Name</td>
                     <td th:text="${doctor.secondName}">Name</td>
                     <td th:text="${doctor.specialization}">Name</td>
-                    <td><a th:href="${'/secure/doctor?id='+doctor.doctorId}">Podgląd</a></td>
+                    <td><a th:href="${'/secure/doctor?id='+doctor.doctorId}" class="bug-button">Podgląd</a></td>
                 </tr>
                 </tbody>
             </table>

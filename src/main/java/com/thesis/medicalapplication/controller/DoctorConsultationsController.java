@@ -42,6 +42,7 @@ public class DoctorConsultationsController {
     public String doctorDetails(@RequestParam("id") Integer id, Model model, HttpServletRequest request) {
         Consultation consultation = consultationService.findConsultationById(id);
         model.addAttribute("user", request.getRemoteUser());
+        model.addAttribute("userQuestion", consultation.getUser().getUsername());
         model.addAttribute("consultation", consultation);
         return "doctor/doctorConsultationDetails";
     }
